@@ -1,0 +1,128 @@
+   <!-- START @HEADER -->
+   <header id="header">
+     <!-- Start header left -->
+     <div class="header-left">
+       <!-- Start offcanvas left: This menu will take position at the top of template header (mobile only). Make sure that only #header have the `position: relative`, or it may cause unwanted behavior -->
+       <div class="navbar-minimize-mobile left" (click) = "onMenuClick()">
+         <i class="fa fa-bars"></i>
+       </div>
+       <!--/ End offcanvas left -->
+
+       <!-- Start navbar header -->
+       <div class="navbar-header" style="background-color: #63d3e9">
+
+         <!-- Start brand -->
+         <a class="navbar-brand" href="#">
+           <img class="logo" src="https://www.whats42nite.com/prodev/images/42nite_logo.png" style="width: 100px;height: 45px;"
+             alt="brand logo">
+         </a><!-- /.navbar-brand -->
+         <!--/ End brand -->
+
+       </div><!-- /.navbar-header -->
+       <!--/ End navbar header -->
+
+       <div class="clearfix"></div>
+     </div><!-- /.header-left -->
+     <!--/ End header left -->
+
+     <!-- Start header right -->
+     <div class="header-right">
+       <!-- Start navbar toolbar -->
+       <div class="navbar navbar-toolbar navbar-dark" style="border-radius: 1px;">
+
+         <!-- Start left navigation -->
+         <ul class="nav navbar-nav navbar-left">
+
+           <!-- Start sidebar shrink -->
+           <li class="navbar-minimize">
+             <a (click) = "onMenuClick()" title="Minimize sidebar">
+               <i class="fa fa-bars"></i>
+             </a>
+           </li>
+           <!--/ End sidebar shrink -->
+
+         </ul><!-- /.nav navbar-nav navbar-left -->
+         <!--/ End left navigation -->
+
+         <!-- for show count of events, posts, venues, followers and rating -->
+         <ul class="nav carousel-inner" style="width: auto" id="all_element">
+
+           <marquee onmouseover="this.stop();" onmouseout="this.start();" scrollamount="5" style="margin-top: 15px">
+
+
+             <a href="#"
+               style="margin-left: 15px;color: #ffffff"><i class="fa fa-heart"></i> {{getFollowerCount()}} Followers
+               <i class="fa " id="follower" style="color: #6bc34a"></i> </a><a id="follower_count"
+               style="color: rgb(249, 237, 89);">• {{getFollowersRate()}} </a>
+
+             <a href="#"
+               style="margin-left: 15px;color: #ffffff"><i class="fa fa-star"></i> {{getRatingCount()}} Rating
+               <i class="fa fa-angle-double-up" id="profile_reach" style="color: #6bc34a"></i></a><a
+               id="rating_count" style="color: rgb(107, 195, 74);">{{getRatingRate()}}</a>
+
+             <a href="#"
+               style="margin-left: 15px;color: #ffffff"><i class="fa fa-eye"></i> {{getPageReachCount()}} Page Reach <i
+                 class="fa fa-angle-double-up" id="profile_reach" style="color: #6bc34a"></i> </a><a
+               id="profile_reach_count" style="color: rgb(107, 195, 74);">{{getPageReachRate()}}</a>
+
+             <a href="#" style="margin-left: 15px;color: #ffffff"><i
+                 class="fa fa-calendar"></i> {{getEventsCount()}} Events
+               <i class="fa fa-angle-double-up" id="total_event" style="color: #6bc34a"></i> </a><a
+               id="total_event_count" style="color: rgb(107, 195, 74);">{{getEventsRate()}}</a>
+
+             <a href="#" style="margin-left: 15px;color: #ffffff"><i
+                 class="fa fa-eye"></i> {{getEventsReachCount()}} Events
+               Reach
+               <i class="fa fa-angle-double-up" id="events_reaches" style="color: #6bc34a"></i> </a><a
+               id="events_reaches_count" style="color: rgb(107, 195, 74);">{{getPageReachRate()}}</a>
+
+             <a href="#"
+               style="margin-left: 15px;color: #ffffff"><i class="fa fa-ticket"></i> {{getTicketsCount()}} Tickets
+               <i class="fa fa-angle-double-up" id="ticket" style="color: #6bc34a"></i> </a><a id="tickets_count"
+               style="color: rgb(107, 195, 74);">{{getTicketsRate()}}</a>
+
+             <a href="#" style="margin-left: 15px;color: #ffffff"><i
+                 class="fa fa-usd"></i> {{getEarningCount()}} Earnings
+               <i class="fa " id="earnings" style="color: #6bc34a"></i> </a><a id="earnings_count"
+               style="color: rgb(249, 237, 89);">• {{getEarningRate()}}</a>
+
+             <a href="#" style="margin-left: 15px;color: #ffffff"><i
+                 class="fa fa-pencil-square-o"></i> {{getPostsCount()}} Posts
+               <i class="fa " id="total_post" style="color: #6bc34a"></i> </a><a id="total_post_count"
+               style="color: rgb(249, 237, 89);">• {{getPostsRate()}}</a>
+
+             <a href="#"
+               style="margin-left: 15px;color: #ffffff"><i class="fa fa-thumbs-up"></i> {{getLikesCount()}} Likes
+               <i class="fa fa-angle-double-up" id="posts_likes" style="color: rgb(107, 195, 74);"></i> </a><a
+               id="posts_likes_count" style="color: rgb(107, 195, 74);">{{getLikesRate()}}</a>
+
+             <a href="#"
+               style="margin-left: 15px;color: #ffffff"><i class="fa fa-comment"></i> {{getCommentsCount()}} Comments
+               <i class="fa " id="posts_comments" style="color: #6bc34a"></i> </a><a id="posts_comments_count"
+               style="color: rgb(249, 237, 89);">• {{getCommentsRate()}}</a>
+
+             <a href="#"
+               style="margin-left: 15px;color: #ffffff"><i class="fa fa-share"></i> {{getSharesCount()}} Shares
+               <i class="fa fa-angle-double-up" id="posts_shares" style="color: rgb(107, 195, 74);"></i> </a><a
+               id="posts_shares_count" style="color: rgb(107, 195, 74);">{{getSharesRate()}}</a>
+
+             <a href="#"
+               style="margin-left: 15px;color: #ffffff"><i class="fa fa-eye"></i> {{getPostsReachCount()}} Posts
+               Reach
+               <i class="fa fa-angle-double-up" id="posts_reaches" style="color: rgb(107, 195, 74);"></i> </a><a
+               id="posts_reaches_count" style="color: rgb(107, 195, 74);">{{getPostsReachRate()}}</a>
+
+
+
+           </marquee>
+
+         </ul>
+
+       </div><!-- /.navbar-toolbar -->
+       <!--/ End navbar toolbar -->
+     </div><!-- /.header-right -->
+     <!--/ End header left -->
+
+   </header>
+
+  

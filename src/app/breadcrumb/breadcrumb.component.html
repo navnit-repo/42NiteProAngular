@@ -1,0 +1,41 @@
+<!-- Start page header -->
+<div class="header-content">
+
+
+	<h2 *ngIf="pageType == 'account-summary'"><i class="fa fa-home"></i> Account Summary</h2>
+	<h2 *ngIf="pageType == 'view-venues'"><i class="fa icon-globe icons"></i> Venues List </h2>
+
+
+
+	<div class="breadcrumb-wrapper hidden-xs">
+		<!-- <span class="label">You are here:</span> -->
+
+
+		<ol class="breadcrumb" *ngIf="pageType == 'account-summary'">
+			<li>
+				<i class="fa fa-home"></i>
+				<a>Dashboard</a>
+				<i class="fa fa-angle-right"></i>
+			</li>
+		</ol>
+
+		<ol class="breadcrumb" *ngIf="pageType == 'view-venues'">
+			<li>
+				<i class="fa fa-home"></i>
+				<a routerLink="/">Dashboard</a>
+         <i class=" fa fa-angle-right"></i>
+			</li>
+			<li>
+				<a href="/view-venues">Venues</a>
+				<i class="fa fa-angle-right"></i>
+			</li>
+			<li class="active">Venues List</li>
+		</ol>
+
+
+
+
+
+	</div>
+	<!-- /.breadcrumb-wrapper -->
+</div>

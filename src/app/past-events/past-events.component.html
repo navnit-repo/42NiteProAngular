@@ -1,0 +1,143 @@
+<section id="page-content">
+	<app-breadcrumb></app-breadcrumb>
+	<div class="body-content animated fadeIn">
+
+
+		<div class="panel rounded shadow">
+			<div class="panel-heading">
+				<div class="pull-left">
+					<h3 class="panel-title" style="font-weight:bold;">Past Events: ({{pastEventListLength}})</h3>
+				</div>
+				<div class="pull-right">
+					<button class="btn btn-sm" data-action="" data-container="body" data-toggle="tooltip" data-placement="top" data-title="Add Event" data-original-title="" title="" routerLink="/add-event"><i class="fa fa-plus"></i></button>
+
+					<button class="btn btn-sm" data-action="refresh" data-container="body" data-toggle="tooltip" data-placement="top" data-title="Refresh" data-original-title="" title=""
+          (click)="onrefresh()"><i class="fa fa-refresh"></i></button>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="panel-body">
+
+				<div id="table_wrapper" class="table table-striped table-lilac dataTable no-footer">
+
+
+					<div class="dataTables_scroll">
+						<div class="dataTables_scrollHead"
+							style="overflow: hidden; position: relative; border: 0px; width: 100%;">
+							<div class="dataTables_scrollHeadInner"
+								style="box-sizing: content-box; width: 1371px; padding-right: 0px;">
+
+							</div>
+						</div>
+						<div class="dataTables_scrollBody" style="position: relative; overflow: auto; width: 100%;">
+							<table id="table" class="table table-striped table-teal dataTable no-footer" role="grid"
+								aria-describedby="table_info" datatable [dtOptions]="dtOptions"
+								[dtTrigger]="pastEventTrigger">
+
+								<thead>
+									<tr role="row">
+
+										<th data-class="expand" style="min-width: 90px; width: 109px;"
+											class="text-center expand sorting_disabled" rowspan="1" colspan="1"
+											aria-label="Venue Profile">Image</th>
+
+										<th data-class="expand" style="min-width: 120px; width: 89px;"
+											class="text-center expand sorting_desc" tabindex="0" aria-controls="table"
+											rowspan="1" colspan="1" aria-sort="descending">Name
+										</th>
+
+										<th data-class="expand" style="min-width: 120px; width: 89px;"
+											class="text-center expand sorting" tabindex="0" aria-controls="table"
+											rowspan="1" colspan="1"
+											aria-label="Venue Address: activate to sort column ascending">Event Date
+										</th>
+
+
+
+										<th data-class="expand" style="min-width: 120px; width: 89px;"
+											class="text-center expand sorting_disabled" rowspan="1" colspan="1"
+											aria-label="Phone Number">
+											Seats</th>
+
+										<th data-class="expand" style="min-width: 120px; width: 89px;"
+											class="text-center expand sorting_disabled" rowspan="1" colspan="1"
+											aria-label="Phone Number">
+											Fee</th>
+
+										<th data-class="expand" style="min-width: 120px; width: 89px;"
+											class="text-center expand sorting_disabled" rowspan="1" colspan="1"
+											aria-label="Phone Number">
+											Venue</th>
+
+										<th data-class="expand" style="min-width: 120px; width: 89px;"
+											class="text-center expand sorting_disabled" rowspan="1" colspan="1"
+											aria-label="Phone Number">
+											Type</th>
+
+										<th data-class="expand" style="min-width: 120px; width: 89px;"
+											class="text-center expand sorting_disabled" rowspan="1" colspan="1"
+											aria-label="Phone Number">
+											Created On
+										</th>
+
+										<th data-class="expand" style="min-width: 120px; width: 89px;"
+											class="text-center expand sorting_disabled" rowspan="1" colspan="1"
+											aria-label="Phone Number">
+											Uploaded Images
+										</th>
+
+										<th data-class="expand" style="min-width: 120px; width: 89px;"
+											class="text-center expand sorting_disabled" rowspan="1" colspan="1"
+											aria-label="Phone Number">
+											Action</th>
+
+									</tr>
+								</thead>
+
+
+								<tbody>
+
+
+									<tr role="row" class="odd" *ngFor="let list of pastEventsList">
+										<td class=" expand">
+											<div class="prax-img-holder">
+												<img class="clearfix rounded" src="{{list.event_pic}}"></div>
+										</td>
+										<td class=" expand">{{list.event_name}}</td>
+										<td class=" expand">{{list.event_date}} at {{list.event_start_time}} to
+											{{list.event_end_time}}</td>
+										<td class=" expand">{{list.event_tickets}}</td>
+										<td class=" expand">{{list.event_fee}}$</td>
+										<td class=" expand">{{list.venue_name}}</td>
+										<td class=" expand">{{list.organised_by}}</td>
+										<td class=" expand">-</td>
+
+										<td class=" expand">{{list.total_upload_images}}</td>
+										<td>
+                      <a class="btn btn-success btn-xs" data-toggle="tooltip"
+												data-placement="top" title="View" (click)="onViewEvent(list.event_id)"><i class="fa fa-eye"></i></a>
+
+                        <a class="btn btn-primary btn-xs"
+												data-toggle="tooltip" data-placement="top"
+												title="Add Images"><i class="fa fa-picture-o"></i></a></td>
+
+
+									</tr>
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+
+		<footer class="footer-content">
+			LITE - Luminous Ideas for Technological Evolutions LLC | contact@whats42nite.com | <a target="_blank">Terms
+				and Conditions</a>
+		</footer>
+	</div>
+</section>

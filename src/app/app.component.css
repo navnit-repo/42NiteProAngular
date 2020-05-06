@@ -1,0 +1,14 @@
+body, html {
+    background-color: #E9EAED;
+    font-family: "Open Sans", sans-serif;
+    color: #636E7B;
+    /* color: #000; */
+    -webkit-font-smoothing: antialiased;
+    direction: ltr;
+    line-height: 21px;
+    font-size: 13px;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0 !important;
+}

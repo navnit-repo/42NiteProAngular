@@ -1,0 +1,244 @@
+<!-- <div *ngIf="eventListType == 'past'" ></div>
+<div *ngIf="eventListType == 'upcoming'" ></div> -->
+
+
+<!--      upcoming events table start  -->
+<div class="panel rounded shadow">
+  <div class="panel-heading">
+    <div class="pull-left">
+      <h3 class="panel-title" style="font-weight:bold;"><a>Upcoming
+          Events: (7)</a></h3>
+    </div>
+    <div class="pull-right">
+      <button class="btn btn-sm" data-action="" data-container="body" data-toggle="tooltip" data-placement="top"
+        data-title="Add Event" data-original-title="" title=""><i class="fa fa-plus"></i></button>
+      <button class="btn btn-sm" data-action="refresh" data-container="body" data-toggle="tooltip" data-placement="top"
+        data-title="Refresh" data-original-title="" title=""><i class="fa fa-refresh"></i></button>
+      <button class="btn btn-sm" data-action="collapse" data-container="body" data-toggle="tooltip" data-placement="top"
+        data-title="Collapse" data-original-title="" title=""><i class="fa fa-angle-up"></i></button>
+    </div>
+    <div class="clearfix"></div>
+     <!-- /.panel-heading -->
+  <div class="panel-body">
+    <!-- Start datatable -->
+    <div id="table_wrapper" class="dataTables_wrapper form-inline no-footer">
+      <div class="row">
+        <div class="col-xs-6">
+          <div class="dataTables_length" id="table_length">
+            <label>
+              <select name="table_length" aria-controls="table" class="form-control input-sm">
+                <option value="10">10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+              </select> records per page</label>
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <div id="table_filter" class="dataTables_filter">
+            <label>Search:
+              <input type="search" class="form-control input-sm" placeholder="" aria-controls="table">
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="dataTables_scroll">
+        <div class="dataTables_scrollHead" style="overflow: hidden; position: relative; border: 0px; width: 100%;">
+          <div class="dataTables_scrollHeadInner" style="box-sizing: content-box; width: 1283px; padding-right: 0px;">
+            <table [class]="eventListType == 'upcoming' ? 'table table-striped table-lilac dataTable no-footer' : 'table table-striped table-teal dataTable no-footer'" role="grid"
+              style="margin-left: 0px; width: 1283px;">
+              <thead>
+                <tr role="row">
+                  <th data-class="expand" style="min-width: 90px; width: 93px;"
+                    class="text-center expand sorting_disabled" rowspan="1" colspan="1" aria-label="Image">Image</th>
+                  <th data-hide="phone" style="min-width: 90px; width: 89px;" class="text-center sorting" tabindex="0"
+                    aria-controls="table" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+                    Name</th>
+                  <th data-hide="phone" style="min-width: 90px; width: 89px;" class="text-center sorting_desc"
+                    tabindex="0" aria-controls="table" rowspan="1" colspan="1" aria-sort="descending"
+                    aria-label="Event Date: activate to sort column ascending">Event Date</th>
+                  <th *ngIf="eventListType == 'upcoming'" data-hide="phone" style="min-width: 90px; width: 89px;"
+                    class="text-center sorting" tabindex="0" aria-controls="table" rowspan="1" colspan="1"
+                    aria-label="Days Left: activate to sort column ascending">Days Left</th>
+                  <th data-hide="phone" style="min-width: 90px; width: 89px;" class="text-center sorting" tabindex="0"
+                    aria-controls="table" rowspan="1" colspan="1" aria-label="Seats: activate to sort column ascending">
+                    Seats</th>
+                  <th data-hide="phone" style="min-width: 90px; width: 89px;" class="text-center sorting" tabindex="0"
+                    aria-controls="table" rowspan="1" colspan="1" aria-label="Fee: activate to sort column ascending">
+                    Fee</th>
+                  <th data-hide="phone" style="min-width: 90px; width: 89px;" class="text-center sorting" tabindex="0"
+                    aria-controls="table" rowspan="1" colspan="1" aria-label="Venue: activate to sort column ascending">
+                    Venue</th>
+                  <th data-hide="phone" style="min-width: 90px; width: 89px;" class="text-center sorting" tabindex="0"
+                    aria-controls="table" rowspan="1" colspan="1" aria-label="Type: activate to sort column ascending">
+                    Type</th>
+                  <th data-hide="phone" style="min-width: 90px; width: 89px;" class="text-center sorting" tabindex="0"
+                    aria-controls="table" rowspan="1" colspan="1"
+                    aria-label="Created On: activate to sort column ascending">Created On</th>
+                  <th *ngIf="eventListType == 'past'" data-hide="phone" style="min-width: 90px; width: 89px;"
+                    class="text-center sorting" tabindex="0" aria-controls="table" rowspan="1" colspan="1"
+                    aria-label="Uploaded Images: activate to sort column ascending">Uploaded Images</th>
+                  <th data-hide="phone,tablet" style="min-width: 100px; width: 100px;"
+                    class="text-center sorting_disabled" rowspan="1" colspan="1" aria-label="Action">Action</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </div>
+        <div class="dataTables_scrollBody" style="position: relative; overflow: auto; width: 100%;">
+          <table id="table" class="table table-striped table-lilac dataTable no-footer" role="grid"
+            aria-describedby="table_info">
+            <thead>
+              <tr role="row" style="height: 0px; visibility: collapse;">
+                <th data-class="expand"
+                  style="min-width: 90px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px; width: 93px;"
+                  class="text-center expand sorting_disabled" rowspan="1" colspan="1" aria-label="Image">
+                  <div class="dataTables_sizing" style="height:0;overflow:hidden;">Image</div>
+                </th>
+                <th data-hide="phone"
+                  style="min-width: 90px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px; width: 89px;"
+                  class="text-center sorting" aria-controls="table" rowspan="1" colspan="1"
+                  aria-label="Name: activate to sort column ascending">
+                  <div class="dataTables_sizing" style="height:0;overflow:hidden;">Name</div>
+                </th>
+                <th data-hide="phone"
+                  style="min-width: 90px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px; width: 89px;"
+                  class="text-center sorting_desc" aria-controls="table" rowspan="1" colspan="1" aria-sort="descending"
+                  aria-label="Event Date: activate to sort column ascending">
+                  <div class="dataTables_sizing" style="height:0;overflow:hidden;">Event Date</div>
+                </th>
+                <th data-hide="phone"
+                  style="min-width: 90px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px; width: 89px;"
+                  class="text-center sorting" aria-controls="table" rowspan="1" colspan="1"
+                  aria-label="Days Left: activate to sort column ascending">
+                  <div class="dataTables_sizing" style="height:0;overflow:hidden;">Days Left</div>
+                </th>
+                <th data-hide="phone"
+                  style="min-width: 90px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px; width: 89px;"
+                  class="text-center sorting" aria-controls="table" rowspan="1" colspan="1"
+                  aria-label="Seats: activate to sort column ascending">
+                  <div class="dataTables_sizing" style="height:0;overflow:hidden;">Seats</div>
+                </th>
+                <th data-hide="phone"
+                  style="min-width: 90px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px; width: 89px;"
+                  class="text-center sorting" aria-controls="table" rowspan="1" colspan="1"
+                  aria-label="Fee: activate to sort column ascending">
+                  <div class="dataTables_sizing" style="height:0;overflow:hidden;">Fee</div>
+                </th>
+                <th data-hide="phone"
+                  style="min-width: 90px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px; width: 89px;"
+                  class="text-center sorting" aria-controls="table" rowspan="1" colspan="1"
+                  aria-label="Venue: activate to sort column ascending">
+                  <div class="dataTables_sizing" style="height:0;overflow:hidden;">Venue</div>
+                </th>
+                <th data-hide="phone"
+                  style="min-width: 90px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px; width: 89px;"
+                  class="text-center sorting" aria-controls="table" rowspan="1" colspan="1"
+                  aria-label="Type: activate to sort column ascending">
+                  <div class="dataTables_sizing" style="height:0;overflow:hidden;">Type</div>
+                </th>
+                <th data-hide="phone"
+                  style="min-width: 90px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px; width: 89px;"
+                  class="text-center sorting" aria-controls="table" rowspan="1" colspan="1"
+                  aria-label="Created On: activate to sort column ascending">
+                  <div class="dataTables_sizing" style="height:0;overflow:hidden;">Created On</div>
+                </th>
+
+                <th data-hide="phone,tablet"
+                  style="min-width: 100px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px; width: 100px;"
+                  class="text-center sorting_disabled" rowspan="1" colspan="1" aria-label="Action">
+                  <div class="dataTables_sizing" style="height:0;overflow:hidden;">Action</div>
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+
+              <tr role="row" class="odd" *ngFor="let eventslist of upcomingEventsList">
+
+                <td *ngIf="eventListType == 'upcoming'" class=" expand">
+                  <div class="prax-img-holder"><img class="clearfix rounded" src="{{eventslist.image}}"></div>
+                </td>
+                <td *ngIf="eventListType == 'upcoming'">{{eventslist.name}}</td>
+                <td *ngIf="eventListType == 'upcoming'" class="sorting_1">{{eventslist.event_date}}</td>
+                <td *ngIf="eventListType == 'upcoming'">{{eventslist.days_left}}</td>
+                <td *ngIf="eventListType == 'upcoming'">{{eventslist.seats}}</td>
+                <td *ngIf="eventListType == 'upcoming'">{{eventslist.fee}}</td>
+                <td *ngIf="eventListType == 'upcoming'">{{eventslist.venue}}</td>
+                <td *ngIf="eventListType == 'upcoming'"><a class="btn btn- btn-xs" data-toggle="tooltip"
+                    data-placement="top" style="color: black" title="Bar"><i
+                      [ngClass]="eventslist.type == 'bar' ? 'fa fa-glass': 'fa fa-globe'"></i>{{eventslist.type}}</a>
+                </td>
+                <td *ngIf="eventListType == 'upcoming'">{{eventslist.created_on}}</td>
+                <td *ngIf="eventListType == 'upcoming'" class="hidden">Upload Image</td>
+                <td *ngIf="eventListType == 'upcoming'"><a class="btn btn-success btn-xs" routerLink="/view-event"
+                    data-toggle="tooltip" data-placement="top" title="View"><i class="fa fa-eye"></i></a><a
+                    class="btn btn-primary btn-xs" href="{{eventslist.action.editURL}}" data-toggle="tooltip"
+                    data-placement="top" title="Edit"><i class="fa fa-pencil"></i></a><a class="btn btn-danger btn-xs"
+                    href="{{eventslist.action.deleteURL}}" data-toggle="tooltip" data-placement="top" title="Delete"><i
+                      class="fa fa-trash"></i></a></td>
+              </tr>
+
+
+              <style>
+                .hidden {
+                  display: none;
+                }
+
+              </style>
+
+
+              <!-- <tr *ngFor="let pastEvent of pastEventsList">
+                <td *ngIf="eventListType == 'past'" class=" expand">
+                  <div class="prax-img-holder"><img class="clearfix rounded" src="{{pastEvent.image}}"></div>
+                </td>
+                <td *ngIf="eventListType == 'past'">{{pastEvent.name}}</td>
+                <td *ngIf="eventListType == 'past'">{{pastEvent.event_date}}</td>
+                <td class="hidden">days left</td>
+                <td *ngIf="eventListType == 'past'">{{pastEvent.seats}}</td>
+                <td *ngIf="eventListType == 'past'">{{pastEvent.fee}}</td>
+                <td *ngIf="eventListType == 'past'"> {{pastEvent.venue}}</td>
+                <td *ngIf="eventListType == 'past'"><a class="btn btn- btn-xs" data-toggle="tooltip"
+                    data-placement="top" style="color: black" title="Club"><i [ngClass]="pastEvent.type == 'bar' ? 'fa fa-glass': 'fa fa-globe'"></i>
+                    {{pastEvent.type}}</a></td>
+                <td *ngIf="eventListType == 'past'">{{pastEvent.created_on}}</td>
+                <td *ngIf="eventListType == 'past'">{{pastEvent.uploaded_images}}</td>
+                <td *ngIf="eventListType == 'past'"><a class="btn btn-success btn-xs" routerLink="/view-event"
+                    data-toggle="tooltip" data-placement="top" title="View"><i class="fa fa-eye"></i></a><a
+                    class="btn btn-primary btn-xs"
+                    href="" data-toggle="tooltip"
+                    data-placement="top" title="Add Images"><i class="fa fa-picture-o"></i></a></td>
+              </tr> -->
+
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6">
+          <div class="dataTables_info" id="table_info" role="status" aria-live="polite">Showing 1 to 7 of 7 entries
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <div class="dataTables_paginate paging_simple_numbers" id="table_paginate">
+            <ul class="pagination">
+              <li class="paginate_button previous disabled" aria-controls="table" tabindex="0" id="table_previous"><a
+                  href="">Previous</a></li>
+              <li class="paginate_button active" aria-controls="table" tabindex="0"><a
+                  href="">1</a></li>
+              <li class="paginate_button next disabled" aria-controls="table" tabindex="0" id="table_next"><a
+                  href="">Next</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--/ End datatable -->
+  </div>
+  <!-- /.panel-body -->
+</div>
+</div>
+
+<!--      upcoming events table ends  -->

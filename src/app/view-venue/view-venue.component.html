@@ -1,0 +1,208 @@
+<section id="page-content">
+	<app-breadcrumb></app-breadcrumb>
+	<div class="body-content animated fadeIn">
+
+		<!-- Start grid option -->
+
+
+		<div class="panel rounded shadow no-overflow">
+
+
+
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel-heading">
+						<div class="pull-left">
+							<h3 class="panel-title" style="font-weight:bold;">Venue Detail</h3>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+
+					<!-- loading -->
+					<div id="fullpageloading" *ngIf="pageLoading">
+						<div class="spinner-container">
+							<div class="spinner spinner-left"></div>
+							<div class="spinner spinner-right"></div>
+						</div>
+					</div>
+
+					<div class="table-responsive">
+						<table class="table table-bordered table-striped">
+							<tbody>
+								<tr>
+									<th>Venue Name</th>
+									<td colspan="4">{{getVenueName()}}</td>
+								</tr>
+								<tr>
+									<th>Venue Description</th>
+									<td colspan="4">{{getVenueDescription()}}</td>
+								</tr>
+								<tr>
+									<th>Email</th>
+									<td colspan="4">{{getVenueEmail()}}</td>
+								</tr>
+								<tr>
+									<th>Venue Address</th>
+									<td colspan="4">{{getVenueAddress()}}</td>
+								</tr>
+								<tr>
+									<th>City</th>
+									<td colspan="4">{{getVenueCity()}}</td>
+								</tr>
+								<tr>
+									<th>Country</th>
+									<td colspan="4">{{getVenueCountry()}}</td>
+								</tr>
+
+								<tr>
+									<th>Zip Code</th>
+									<td colspan="4">{{getVenueZipCode()}}</td>
+								</tr>
+								<tr>
+									<th>Contact Number</th>
+									<td colspan="4">{{getVenueContactNumber()}}</td>
+								</tr>
+								<tr>
+									<th>Stripe Account</th>
+									<td colspan="4"><span><a type="button"
+                      href="#" value=""
+                      class="btn btn-warning">Setup Account</a></span></td>
+								</tr>
+							</tbody>
+						</table>
+					</div><!-- /.table-responsive -->
+				</div>
+			</div>
+			<!--/ End grid option -->
+		</div>
+
+		<div class="panel rounded shadow no-overflow">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel-heading">
+						<div class="pull-left">
+							<h3 class="panel-title" style="font-weight:bold;">Hours of Operation</h3>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+
+					<div class="table-responsive">
+						<table class="table table-bordered table-striped">
+							<tbody>
+								<tr>
+									<th>Day</th>
+									<th colspan="4">Opening Time</th>
+									<th colspan="4">Closing Time</th>
+								</tr>
+
+								<tr>
+									<th>Monday</th>
+									<td colspan="4">{{getMondayOpeningTime()}}</td>
+									<td colspan="4">{{getMondayClosingTime()}}</td>
+								</tr>
+
+
+								<tr>
+									<th>Tuesday</th>
+									<td colspan="4">{{getTuesdayOpeningTime()}}</td>
+									<td colspan="4">{{getTuesdayClosingTime()}}</td>
+								</tr>
+
+
+								<tr>
+									<th>Wednesday</th>
+									<td colspan="4">{{getWednesdayOpeningTime()}}</td>
+									<td colspan="4">{{getWednesdayClosingTime()}}</td>
+								</tr>
+
+
+								<tr>
+									<th>Thursday</th>
+									<td colspan="4">{{getThursdayOpeningTime()}}</td>
+									<td colspan="4">{{getThursdayClosingTime()}}</td>
+								</tr>
+
+
+								<tr>
+									<th>Friday</th>
+									<td colspan="4">{{getFridayOpeningTime()}}</td>
+									<td colspan="4">{{getFridayClosingTime()}}</td>
+								</tr>
+
+
+								<tr>
+									<th>Saturday</th>
+									<td colspan="4">{{getSaturdayOpeningTime()}}</td>
+									<td colspan="4">{{getSaturdayClosingTime()}}</td>
+								</tr>
+
+
+								<tr>
+									<th>Sunday</th>
+									<td colspan="4">{{getSundayOpeningTime()}}</td>
+									<td colspan="4">{{getSundayClosingTime()}}</td>
+								</tr>
+
+
+							</tbody>
+						</table>
+					</div><!-- /.table-responsive -->
+				</div>
+			</div>
+			<!--/ End grid option -->
+		</div>
+
+		<div class="body-content animated fadeIn">
+
+
+			<div class="panel rounded shadow no-overflow">
+				<div class="panel-heading">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="pull-left">
+								<h3 class="panel-title" style="font-weight:bold;">Venue Profile Images</h3>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="js-grid-mosaic-flat"
+				class="cbp cbp-l-grid-mosaic-flat cbp-caption-active cbp-caption-fadeIn cbp-ready"
+				style="height: 170px;">
+				<div class="cbp-wrapper-outer">
+					<div class="cbp-wrapper">
+
+
+
+						<!-- <div class="cbp-item people" style="width: 285px; left: 0px; top: 0px;"
+							*ngFor="let images of viewVenueDetails.profile_images">
+							<div class="cbp-item-wrapper">
+								<a href="{{images}}" class="cbp-caption cbp-lightbox" style="height:auto"
+									data-title="{{images}}" rel="nofollow">
+									<img src="{{images}}" class="img-responsive" alt="">
+
+									<div class="cbp-caption-activeWrap">
+										<div class="cbp-l-caption-alignCenter">
+											<div class="cbp-l-caption-body">
+											</div>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div> -->
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<footer class="footer-content">
+			LITE - Luminous Ideas for Technological Evolutions LLC | contact@whats42nite.com | <a target="_blank">Terms
+				and Conditions</a>
+		</footer>
+	</div>
+</section>

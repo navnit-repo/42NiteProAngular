@@ -1,0 +1,913 @@
+<section id="page-content">
+	<app-breadcrumb></app-breadcrumb>
+
+	<div class="body-content animated fadeIn">
+
+		<div class="row">
+			<div class="col-md-12">
+				<!-- Start form validation wizard -->
+				<div id="validation-wizard">
+					<h4>Venue Detail</h4>
+					<div class="panel panel-tab rounded shadow">
+						<div class="panel-heading no-padding">
+							<ul class="nav nav-tabs nav-pills">
+								<li [ngClass]="{'active': locationTabActive}">
+									<a (click)="onLocationTabClick()">
+										<i class="fa fa-user"></i>
+										<div>
+											<span class="text-strong">Location</span>
+											<span>Detail</span>
+										</div>
+									</a>
+								</li>
+
+								<li [ngClass]="{'active': scheduleTabActive}">
+									<a (click)="onScheduleClick()">
+										<i class="fa fa-clock-o"></i>
+										<div>
+											<span class="text-strong">Schedule</span>
+											<span>Hours of Operation</span>
+										</div>
+									</a>
+								</li>
+
+								<li [ngClass]="{'active': imageTabActive}">
+									<a (click)="onVenueImageClick()">
+										<i class="fa fa-file-image-o"></i>
+										<div>
+											<span class="text-strong">Venue</span>
+											<span>Images</span>
+										</div>
+									</a>
+								</li>
+							</ul>
+						</div>
+
+						<!-- Start tabs content -->
+						<div class="panel-body">
+
+							<!-- page loading -->
+							<div id="fullpageloading" *ngIf="pageLoading">
+								<div class="spinner-container">
+									<div class="spinner spinner-left"></div>
+									<div class="spinner spinner-right"></div>
+								</div>
+							</div>
+							<!-- page loading end -->
+							<form class="tab-content form-horizontal" [formGroup]="addVenueForm"
+								(ngSubmit)="onSubmit()">
+								<div class="tab-pane fade in  inner-all" [ngClass]="{'in active': locationTabActive}">
+									<h4 class="page-header">Venue Details</h4>
+
+									<div class="col-lg-12 col-md-12 col-sm-12">
+										<div class="col-lg-8 col-md-8 col-sm-8">
+											<div class="form-group">
+												<label class="col-sm-3" style="font-weight: bold;"
+                          >Venue Name <span class="asterisk">*</span></label>
+												<div class="col-sm-7">
+
+													<input ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)" placeholder="Name of Venue"  class="form-control" formControlName="venueName" type="text"/>
+													<span
+                            class="help-block text-danger"
+                            *ngIf="addVenueForm.controls.venueName.invalid && addVenueForm.controls.venueName.touched && addVenueForm.controls.venueName.errors.required"
+                          >
+                            This field is required.</span>
+													<span
+                            class="help-block text-danger"
+                            *ngIf="addVenueForm.controls.venueName.invalid && addVenueForm.controls.venueName.errors.required && is_submitted"
+                          >
+                            This field is required.</span>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="col-sm-3" style="font-weight: bold;"
+                          >Email <span class="asterisk">*</span></label>
+												<div class="col-sm-7">
+													<!--  <span class="input-group-addon bg-primary">@</span>-->
+													<input
+                            placeholder="Email"
+                            value=""
+                            class="form-control"
+                            type="text"
+                            formControlName="venueEmail"
+                          />
+													<span
+                            class="help-block text-danger"
+                            *ngIf="(addVenueForm.controls.venueEmail.invalid && addVenueForm.controls.venueEmail.touched && addVenueForm.controls.venueEmail.errors.required) || (addVenueForm.controls.venueEmail.invalid && addVenueForm.controls.venueEmail.errors.required && is_submitted)  "
+                          >
+                            This field is required.</span>
+													<span
+                            class="help-block text-danger"
+                            *ngIf="addVenueForm.controls.venueEmail.invalid && addVenueForm.controls.venueEmail.touched && addVenueForm.controls.venueEmail.errors.pattern"
+                          >
+                            Please enter a valid email address.</span>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="col-sm-3" style="font-weight: bold;"
+                          >Contact Number <span class="asterisk">*</span></label>
+												<div class="col-sm-7">
+													<input
+                            type="number"
+                            placeholder="Contact Number"
+                            class="form-control"
+                            formControlName="contactNumber"
+                          />
+													<span
+                            class="help-block text-danger"
+                            *ngIf="addVenueForm.controls.contactNumber.invalid && addVenueForm.controls.contactNumber.touched && addVenueForm.controls.contactNumber.errors.required"
+                          >
+                            This field is required.</span>
+													<span
+                            class="help-block text-danger"
+                            *ngIf="addVenueForm.controls.contactNumber.invalid  && addVenueForm.controls.contactNumber.errors.required && is_submitted"
+                          >
+                            This field is required.</span>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="col-sm-3" style="font-weight: bold;"
+                          >Venue Type <span class="asterisk">*</span></label>
+												<div class="col-sm-7">
+													<select
+                            class="form-control mb-15"
+                            formControlName="venueType"
+                            style="border-radius: 0px;"
+                          >
+                            <option value="">Select Venue Type</option>
+                            <option value="1">Club</option>
+                            <option value="2">Bar</option>
+                          </select>
+													<span
+                            class="help-block text-danger"
+                            *ngIf="addVenueForm.controls.venueType.invalid && addVenueForm.controls.venueType.touched && addVenueForm.controls.venueType.errors.required"
+                          >
+                            This field is required.</span>
+													<span
+                            class="help-block text-danger"
+                            *ngIf="addVenueForm.controls.venueType.invalid && addVenueForm.controls.venueType.errors.required && is_submitted"
+                          >
+                            This field is required.</span>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="col-sm-3" style="font-weight: bold;"
+                          >Description
+                        </label>
+												<div class="col-sm-7">
+													<textarea
+                            class="form-control"
+                            rows="5"
+                            formControlName="venueDescription"
+                            placeholder="Venue Description"
+                            style="border-radius:0px;"
+                          ></textarea>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="col-sm-3" style="font-weight: bold;"
+                          >Address <span class="asterisk">*</span></label>
+												<div class="col-sm-7">
+													<input ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)" placeholder="Address" formControlName="venueAddress" class="form-control" type="text"/>
+
+													<span
+                            class="help-block text-danger"
+                            *ngIf="addVenueForm.controls.venueAddress.invalid && addVenueForm.controls.venueAddress.touched && addVenueForm.controls.venueAddress.errors.required"
+                          >
+                            This field is required.</span>
+													<span
+                            class="help-block text-danger"
+                            *ngIf="addVenueForm.controls.venueAddress.invalid && addVenueForm.controls.venueAddress.errors.required && is_submitted"
+                          >
+                            This field is required.</span>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="col-sm-3" style="font-weight: bold;"
+                          >City <span class="asterisk">*</span></label>
+												<div class="col-sm-7">
+													<input
+                            placeholder="city"
+                            formControlName="venueCity"
+                            id="venue_city"
+                            class="form-control"
+                            type="text"
+                          />
+													<span
+                            class="help-block text-danger"
+                            *ngIf="addVenueForm.controls.venueCity.invalid && addVenueForm.controls.venueCity.touched && addVenueForm.controls.venueCity.errors.required"
+                          >
+                            This field is required.</span>
+													<span
+                            class="help-block text-danger"
+                            *ngIf="addVenueForm.controls.venueCity.invalid && addVenueForm.controls.venueCity.errors.required && is_submitted"
+                          >
+                            This field is required.</span>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="col-sm-3" style="font-weight: bold;"
+                          >Country <span class="asterisk">*</span></label>
+												<div class="col-sm-7">
+													<input
+                            placeholder="country"
+                            formControlName="venueCountry"
+                            class="form-control"
+                            type="text"
+                            id="venue_country"
+                          />
+													<span
+                            class="help-block text-danger"
+                            *ngIf="addVenueForm.controls.venueCountry.invalid && addVenueForm.controls.venueCountry.touched && addVenueForm.controls.venueCountry.errors.required"
+                          >
+                            This field is required.</span>
+													<span
+                            class="help-block text-danger"
+                            *ngIf="addVenueForm.controls.venueCountry.invalid && addVenueForm.controls.venueCountry.errors.required && is_submitted"
+                          >
+                            This field is required.</span>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="col-sm-3" style="font-weight: bold;"
+                          >Zip Code <span class="asterisk">*</span></label>
+												<div class="col-sm-7">
+													<input
+                            placeholder="Zip Code"
+                            value=""
+                            formControlName="venueZipCode"
+                            class="form-control"
+                            type="text"
+                          />
+
+												</div>
+												</div>
+											</div>
+											<div class="col-lg-4 col-md-4 col-sm-4">
+												<!--   google map start   -->
+												<div class="form-group">
+													<div class="col-md-12">
+														<div class="panel rounded shadow panel-danger">
+															<div class="panel-heading">
+																<div class="pull-left">
+																	<h3 class="panel-title">Venue Location</h3>
+																</div>
+																<div class="clearfix"></div>
+															</div>
+															<div class="panel-body no-padding">
+
+																<agm-map [latitude]="latitude" [longitude]="longitude"
+																	[zoom]="zoom" [fullscreenControl]="true"
+																	[mapTypeControl]="true">
+																	<agm-marker [latitude]="latitude"
+																		[longitude]="longitude"
+																		[markerDraggable]="true">
+																	</agm-marker>
+																</agm-map>
+															</div>
+														</div>
+													</div>
+												</div>
+												<!--   google map end   -->
+											</div>
+										</div>
+									</div>
+
+									<div class="tab-pane fade inner-all" id="schedule-tab-body"
+										[ngClass]="{'in active': scheduleTabActive}">
+										<h4 class="page-header">Hours of Operation</h4>
+										<div class="panel-body">
+											<div class="form-body">
+
+												<!-- Monday -->
+												<div id="monday-time">
+													<div class="col-md-1">
+														<label>Monday</label>
+													</div>
+													<div class="form-group">
+
+														<div class="col-md-2">
+
+															<!-- Monday Opening -->
+															<div class="input-group">
+																<ng-template #popTemplate>
+																	<timepicker formControlName="mondayOpenDatePicker"
+																		(ngModelChange)="getMondayOpeningTime($event)"
+																		[showMeridian]="true"></timepicker>
+																</ng-template>
+																<input
+                                placeholder="01:00 AM"
+                                formControlName="monday_opening"
+                                [(ngModel)]="opening_schedule.monday.opening" [popover]="popTemplate" [outsideClick]="true" placement="bottom"
+                                id="monday_open"
+                                class="form-control"
+                                type="text"
+                              />
+																<span class="input-group-addon"
+                                ><i class="glyphicon glyphicon-time"></i
+                              ></span>
+															</div>
+
+														</div>
+
+														<div class="col-md-2">
+															<div class="input-group">
+																<ng-template #popTemplate2>
+																	<timepicker formControlName="mondayCloseDatePicker"
+																		(ngModelChange)="getMondayClosingTime($event)"
+																		[showMeridian]="true"></timepicker>
+																</ng-template>
+																<input
+                              placeholder="02:00 AM"
+                              formControlName="monday_closing"
+                              [(ngModel)] = "opening_schedule.monday.closing"
+                                id="monday_close"
+                                class="form-control"
+                                type="text"
+                                [popover]="popTemplate2" [outsideClick]="true" placement="bottom"
+                              />
+																<span class="input-group-addon"
+                                ><i class="glyphicon glyphicon-time"></i
+                              ></span>
+															</div>
+														</div>
+
+														<div class="col-md-2">
+															<div class="ckbox ckbox-teal">
+																<input
+
+                                id="monday"
+                                formControlName="monday_is_closed"
+                                [(ngModel)] = "mondayClose" (change)="checkboxModay($event)"
+                                type="checkbox"
+
+                              />
+																<label for="monday">Is closed</label>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+
+
+											<!-- same for all weeks -->
+											<div class="ckbox ckbox-teal" style="margin-left: 12px;">
+												<input
+                        id="same_for_all_week_days"
+                        formControlName="same_for_all_weeks"
+                        type="checkbox"
+                        [(ngModel)] = "sameForAll"
+                        (change)="sameForAllWeeks($event)"
+                      />
+												<label for="same_for_all_week_days">
+                        Same for all week days</label>
+											</div>
+
+
+											<!-- Tuesday -->
+											<div class="form-body" id="tuesday-time" [ngClass]="{'hidden': sameForAll}">
+												<div>
+													<div class="col-md-1">
+														<label>Tuesday</label>
+													</div>
+
+
+													<!-- tuesday opening -->
+													<div class="col-md-2">
+														<div class="input-group">
+															<ng-template #popTemplate3>
+																<timepicker formControlName="tuesdayOpenDatePicker"
+																	(ngModelChange)="getTuesdayOpeningTime($event)"
+																	[showMeridian]="true"></timepicker>
+															</ng-template>
+															<input
+                            placeholder="01:00 AM"
+                              [(ngModel)] = "opening_schedule.tuesday.opening"
+                              formControlName="tuesday_opening"
+                              id="tuesday_open"
+                              class="form-control"
+                              type="text"
+                              [popover]="popTemplate3" [outsideClick]="true" placement="bottom"
+                            />
+															<span class="input-group-addon"
+                              ><i class="glyphicon glyphicon-time"></i
+                            ></span>
+														</div>
+													</div>
+
+													<!-- tuesday closing -->
+													<div class="col-md-2">
+														<div class="input-group">
+															<ng-template #popTemplate4>
+																<timepicker formControlName="tuesdayCloseDatePicker"
+																	(ngModelChange)="getTuesdayClosingime($event)"
+																	[showMeridian]="true"></timepicker>
+															</ng-template>
+															<input
+                              placeholder="02:00 AM"
+                              formControlName="tuesday_closing"
+                              [(ngModel)] = "opening_schedule.tuesday.closing"
+                              id="tuesday_close"
+                              class="form-control"
+                              type="text"
+                              [popover]="popTemplate4" [outsideClick]="true" placement="bottom"
+                            />
+															<span class="input-group-addon"
+                              ><i class="glyphicon glyphicon-time"></i
+                            ></span>
+														</div>
+													</div>
+
+													<div class="col-md-2">
+														<div class="ckbox ckbox-teal">
+															<input
+                              id="tuesday"
+                              formControlName="tuesday_is_closed"
+                              type="checkbox"
+                              [(ngModel)] = "tuesdayClose"
+                              (change)="checkboxTuesday($event)"
+                            />
+															<label for="tuesday">Is closed</label>
+														</div>
+													</div>
+												</div>
+												<div class="clearfix"></div>
+											</div>
+
+											<!-- Wednesday -->
+
+											<div class="form-body" id="wednesday-time"
+												[ngClass]="{'hidden': sameForAll}">
+												<div>
+													<div class="col-md-1">
+														<label>Wednesday</label>
+													</div>
+
+													<!-- wednesday opening -->
+													<div class="col-md-2">
+														<div class="input-group">
+															<ng-template #popTemplate5>
+																<timepicker formControlName="wednesdayOpenDatePicker"
+																	(ngModelChange)="getWednesdayOpeningTime($event)"
+																	[showMeridian]="true"></timepicker>
+															</ng-template>
+															<input
+                              placeholder="01:00 AM"
+                              [(ngModel)] = "opening_schedule.wednesday.opening"
+                              formControlName="wednesday_opening"
+                              id="wednesday_open"
+                              class="form-control"
+                              type="text"
+                              [popover]="popTemplate5" [outsideClick]="true" placement="bottom"
+                            />
+															<span class="input-group-addon"
+                              ><i class="glyphicon glyphicon-time"></i
+                            ></span>
+														</div>
+													</div>
+
+													<!-- wednesday closing -->
+													<div class="col-md-2">
+														<div class="input-group">
+															<ng-template #popTemplate6>
+																<timepicker formControlName="wednesdayCloseDatePicker"
+																	(ngModelChange)="getWednesdayClosingTime($event)"
+																	[showMeridian]="true"></timepicker>
+															</ng-template>
+															<input
+                              placeholder="02:00 AM"
+                              formControlName="wednesday_closing"
+                              [(ngModel)] = "opening_schedule.wednesday.closing"
+                              id="wednesday_close"
+                              class="form-control"
+                              type="text"
+                              [popover]="popTemplate6" [outsideClick]="true" placement="bottom"
+                            />
+															<span class="input-group-addon"
+                              ><i class="glyphicon glyphicon-time"></i
+                            ></span>
+														</div>
+													</div>
+
+													<div class="col-md-2">
+														<div class="ckbox ckbox-teal">
+															<input
+                            id="wednesday"
+                              formControlName="wednesday_is_closed"
+                              type="checkbox"
+                              [(ngModel)] = "wednesdayClose"
+                              (change)="checkboxWednesday($event)"
+                            />
+															<label for="wednesday">Is closed</label>
+														</div>
+													</div>
+												</div>
+												<div class="clearfix"></div>
+											</div>
+
+
+											<!-- thursday -->
+											<div class="form-body" id="thursday-time"
+												[ngClass]="{'hidden': sameForAll}">
+												<div>
+													<div class="col-md-1">
+														<label>Thursday</label>
+													</div>
+
+													<!-- thursday Opening -->
+													<div class="col-md-2">
+														<div class="input-group">
+															<ng-template #popTemplate7>
+																<timepicker formControlName="thursdayOpenDatePicker"
+																	(ngModelChange)="getThursdayOpeningTime($event)"
+																	[showMeridian]="true"></timepicker>
+															</ng-template>
+															<input
+                              placeholder="01:00 AM"
+                              [(ngModel)] = "opening_schedule.thursday.opening"
+                              formControlName="thursday_opening"
+                              id="thursday_open"
+                              class="form-control"
+                              type="text"
+                              [popover]="popTemplate7" [outsideClick]="true" placement="bottom"
+                            />
+															<span class="input-group-addon"
+                              ><i class="glyphicon glyphicon-time"></i
+                            ></span>
+														</div>
+													</div>
+
+													<!-- thursday closing -->
+													<div class="col-md-2">
+														<div class="input-group">
+															<ng-template #popTemplate8>
+																<timepicker formControlName="thursdayCloseDatePicker"
+																	(ngModelChange)="getThursdayClosingTime($event)"
+																	[showMeridian]="true"></timepicker>
+															</ng-template>
+															<input
+                              placeholder="02:00 AM"
+                              [(ngModel)] = "opening_schedule.thursday.closing"
+                              formControlName="thursday_closing"
+                              id="thursday_close"
+                              class="form-control"
+                              type="text"
+                              [popover]="popTemplate8" [outsideClick]="true" placement="bottom"
+                            />
+															<span class="input-group-addon"
+                              ><i class="glyphicon glyphicon-time"></i
+                            ></span>
+														</div>
+													</div>
+
+													<div class="col-md-2">
+														<div class="ckbox ckbox-teal">
+															<input
+                              id="thursday"
+                              formControlName="thursday_is_closed"
+                              type="checkbox"
+                              (change)="checkboxThursday($event)"
+                              [(ngModel)] = "thursdayClose"
+                            />
+															<label for="thursday">Is closed</label>
+														</div>
+													</div>
+												</div>
+												<div class="clearfix"></div>
+											</div>
+
+
+											<!-- Friday -->
+											<div class="form-body" id="friday-time" [ngClass]="{'hidden': sameForAll}">
+												<div>
+													<div class="col-md-1">
+														<label>Friday</label>
+													</div>
+
+													<!-- friday opening -->
+													<div class="col-md-2">
+														<div class="input-group">
+															<ng-template #popTemplate9>
+																<timepicker formControlName="fridayOpenDatePicker"
+																	(ngModelChange)="getFridayOpeningTime($event)"
+																	[showMeridian]="true"></timepicker>
+															</ng-template>
+															<input
+                              placeholder="-1:00 AM"
+                              [(ngModel)] = "opening_schedule.friday.opening"
+                              formControlName="friday_opening"
+                              id="friday_open"
+                              class="form-control"
+                              type="text"
+                              [popover]="popTemplate9" [outsideClick]="true" placement="bottom"
+                            />
+															<span class="input-group-addon"
+                              ><i class="glyphicon glyphicon-time"></i
+                            ></span>
+														</div>
+													</div>
+
+													<!-- friday closing -->
+													<div class="col-md-2">
+														<div class="input-group">
+															<ng-template #popTemplate10>
+																<timepicker formControlName="fridayCloseDatePicker"
+																	(ngModelChange)="getFridayClosingTime($event)"
+																	[showMeridian]="true"></timepicker>
+															</ng-template>
+															<input
+                              placeholder="02:00 AM"
+                              formControlName="friday_closing"
+                              [(ngModel)] = "opening_schedule.friday.closing"
+                              id="friday_close"
+                              class="form-control"
+                              type="text"
+                              [popover]="popTemplate10" [outsideClick]="true" placement="bottom"
+                            />
+															<span class="input-group-addon"
+                              ><i class="glyphicon glyphicon-time"></i
+                            ></span>
+														</div>
+													</div>
+
+													<div class="col-md-2">
+														<div class="ckbox ckbox-teal">
+															<input
+                              id="friday"
+                              formControlName="friday_is_closed"
+                              type="checkbox"
+                              [(ngModel)] = "fridayClose"
+                              (change)="checkboxFriday($event)"
+                            />
+															<label for="friday">Is closed</label>
+														</div>
+													</div>
+												</div>
+												<div class="clearfix"></div>
+											</div>
+
+											<!-- Saturday  -->
+											<div class="form-body">
+												<div id="saturday-time">
+													<div class="col-md-1">
+														<label>Saturday</label>
+													</div>
+
+													<!-- saturday opening -->
+													<div class="col-md-2">
+														<div class="input-group">
+															<ng-template #popTemplate11>
+																<timepicker formControlName="saturdayOpenDatePicker"
+																	(ngModelChange)="getSaturdayOpeningTime($event)"
+																	[showMeridian]="true"></timepicker>
+															</ng-template>
+															<input
+                              placeholder="01:00 AM"
+                              [(ngModel)] = "opening_schedule.saturday.opening"
+                              formControlName="saturday_opening"
+                              id="saturday_open"
+                              class="form-control"
+                              type="text"
+                              [popover]="popTemplate11" [outsideClick]="true" placement="bottom"
+                            />
+															<span class="input-group-addon"
+                              ><i class="glyphicon glyphicon-time"></i
+                            ></span>
+														</div>
+													</div>
+
+													<!-- saturday closing -->
+													<div class="col-md-2">
+														<div class="input-group">
+															<ng-template #popTemplate12>
+																<timepicker formControlName="saturdayCloseDatePicker"
+																	(ngModelChange)="getSaturdayClosingTime($event)"
+																	[showMeridian]="true"></timepicker>
+															</ng-template>
+															<input
+                              placeholder="02:00 AM"
+                              [(ngModel)] = "opening_schedule.saturday.closing"
+                              formControlName="saturday_closing"
+                              id="saturday_close"
+                              class="form-control"
+                              type="text"
+                              [popover]="popTemplate12" [outsideClick]="true" placement="bottom"
+                            />
+															<span class="input-group-addon"
+                              ><i class="glyphicon glyphicon-time"></i
+                            ></span>
+														</div>
+													</div>
+
+													<div class="col-md-2">
+														<div class="ckbox ckbox-teal">
+															<input
+                              id="saturday"
+                              formControlName="saturday_is_closed"
+                              type="checkbox"
+                              [(ngModel)] = "saturdayClose"
+                              (change)="checkboxSaturday($event)"
+                            />
+															<label for="saturday">Is closed</label>
+														</div>
+													</div>
+												</div>
+												<div class="clearfix"></div>
+											</div>
+
+
+											<!-- Sunday -->
+											<div class="form-body">
+												<div id="sunday-time">
+													<div class="col-md-1">
+														<label>Sunday</label>
+													</div>
+
+													<!-- sunday opening -->
+													<div class="col-md-2">
+														<div class="input-group">
+															<ng-template #popTemplate13>
+																<timepicker formControlName="sundayOpenDatePicker"
+																	(ngModelChange)="getSundayOpeningTime($event)"
+																	[showMeridian]="true"></timepicker>
+															</ng-template>
+															<input
+                              placeholder="01:00 AM"
+                              [(ngModel)] = "opening_schedule.sunday.opening"
+                             formControlName="sunday_opening"
+                              id="sunday_open"
+                              class="form-control"
+                              type="text"
+                              [popover]="popTemplate13" [outsideClick]="true" placement="bottom"
+                            />
+															<span class="input-group-addon"
+                              ><i class="glyphicon glyphicon-time"></i
+                            ></span>
+														</div>
+													</div>
+
+
+													<!-- sunday closing -->
+													<div class="col-md-2">
+														<div class="input-group">
+															<ng-template #popTemplate14>
+																<timepicker formControlName="sundayCloseDatePicker"
+																	(ngModelChange)="getSundayClosingTime($event)"
+																	[showMeridian]="true"></timepicker>
+															</ng-template>
+															<input
+                              placeholder="02:00 AM"
+                              [(ngModel)] = "opening_schedule.sunday.closing"
+                              formControlName="sunday_closing"
+                              id="sunday_close"
+                              class="form-control"
+                              type="text"
+                              [popover]="popTemplate14" [outsideClick]="true" placement="bottom"
+                            />
+															<span class="input-group-addon"
+                              ><i class="glyphicon glyphicon-time"></i
+                            ></span>
+														</div>
+													</div>
+
+													<div class="col-md-2">
+														<div class="ckbox ckbox-teal">
+															<input
+                              id="sunday"
+                              formControlName="sunday_is_closed"
+                              type="checkbox"
+                              [(ngModel)] = "sundayClose"
+                             (change) ="checkboxSunday($event)"
+                            />
+															<label for="sunday">Is closed</label>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="tab-pane fade inner-all" id="venue-image-tab-body"
+										[ngClass]="{'in active': imageTabActive}">
+										<div>
+											<input
+                      type="hidden"
+                      id="urldata"
+                      name="urldata"
+                      value="/prodev/venue/createvenueimage"
+                    />
+											<input
+                      type="hidden"
+                      id="get_all_url"
+                      name="get_all_url"
+                      value="/prodev/venue/venue-images?id="
+                    />
+											<input
+                      type="hidden"
+                      id="get_image"
+                      name="get_image"
+                      value="https://www.whats42nite.com/production/images/venue/"
+                    />
+											<input
+                      type="hidden"
+                      id="deleteImage"
+                      name="deletedata"
+                      value=""
+                    />
+                  </div>
+											<div class="panel-heading">
+												<div class="pull-left">
+													<h3 class="panel-title" style="font-weight: bold;">
+														Venue Pictures
+														<span class="asterisk">*</span>
+													</h3>
+												</div>
+												<div class="clearfix"></div>
+											</div>
+
+											<div class="panel rounded shadow">
+												<div class="panel-body no-padding">
+													<div class="panel-body">
+
+														<!--   Start dropzone js -->
+														<div class="custom-dropzone" ngx-dropzone [accept]="'image/*'"
+															(change)="onSelect($event)"
+															[disableClick]="imageFile.length >= 5 ? true : false">
+															<ngx-dropzone-label>
+																<div></div>
+															</ngx-dropzone-label>
+															<ngx-dropzone-image-preview 
+																ngProjectAs="ngx-dropzone-preview"
+																*ngFor="let f of imageFile" [file]="f"
+																[removable]="true" (removed)="onRemove(f)" style="background-image: url('https://picsum.photos/200/300');">
+
+																<ngx-dropzone-label>
+																	(image)
+																</ngx-dropzone-label>
+
+															</ngx-dropzone-image-preview>
+                            
+														</div>
+
+
+													  
+
+
+
+														<!-- End dropzone js -->
+													</div>
+													<p>
+														&nbsp;&nbsp; (Select up to 5 venue profile images)
+														<!-- <a id="image_counter">5</a> -->
+													</p>
+												</div>
+											</div>
+
+											<div class="form-footer">
+												<div class="pull-left col-md-12">
+													<button class="btn btn-teal" id="submit" type="submit">
+                        <b>Submit</b>
+                      </button>
+												</div>
+												<div class="clearfix"></div>
+											</div>
+										</div>
+							</form>
+						</div>
+						<!-- /.panel-body -->
+						<!--/ End tabs content -->
+
+						<!-- Start pager -->
+						<div class="panel-footer" style="margin-bottom: 50px;">
+							<ul class="pager wizard no-margin">
+								<li class="previous" [ngClass]="{'hidden': locationTabActive}"><a
+										(click)="onPrevClick()">Previous</a></li>
+								<li class="next" [ngClass]="{'hidden': imageTabActive}"><a
+										(click)="onNextClick()">Next</a></li>
+							</ul>
+						</div>
+						<!-- /.panel-footer -->
+						<!--/ End pager -->
+					</div>
+					<!-- /.panel -->
+				</div>
+				<!--/ End form validation wizard-->
+			</div>
+		</div>
+
+
+
+		<footer class="footer-content">
+			LITE - Luminous Ideas for Technological Evolutions LLC |
+			contact@whats42nite.com | <a target="_blank">Terms and Conditions</a>
+		</footer>
+	</div>
+</section>

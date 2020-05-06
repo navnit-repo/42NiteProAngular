@@ -1,0 +1,428 @@
+<!-- START @PAGE CONTENT -->
+<section id="page-content">
+
+	<!-- Start page header -->
+	<div class="header-content">
+		<h2>
+
+
+
+			<i class="fa fa-eye"></i><span> Post Displayed</span>
+			<select  class="" name="selected_venue_id" id="selected_venue_id">
+                        <option value="All">All Posts</option>
+                        <option value="554">12340 Boggy Creek Rd</option>
+                    </select>
+
+
+
+
+			<i class="fa fa-user"></i><span>Active Profile</span>
+			<select (change)="onSelectActiveProfile($event.target.value)" name="active_venue_id" id="active_venue_id">
+                 <option *ngFor="let list of venuesList"  [value]="list.venue_id">{{list.venue_name}}</option>
+
+                    </select>
+
+
+		</h2>
+
+		<div class="breadcrumb-wrapper hidden-xs">
+			<!-- <span class="label">You are here:</span> -->
+			<ol class="breadcrumb">
+				<li>
+					<i class="fa fa-home"></i>
+					<a>Dashboard</a>
+					<i class="fa fa-angle-right"></i>
+				</li>
+				<li>
+					<a>Posts</a>
+					<i class="fa fa-angle-right"></i>
+				</li>
+				<li class="active" id="venue_name_text">{{venueName}}</li>
+			</ol>
+		</div><!-- /.breadcrumb-wrapper -->
+	</div>
+	<!--/ End page header -->
+
+	<!-- Start body content -->
+	<div class="body-content animated fadeIn" id="main-div">
+
+		<div class="row">
+			<a>
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+					<div class="mini-stat clearfix bg-facebook-click rounded">
+						<span class="mini-stat-icon"><i class="fa fa-pencil-square-o"
+                                        style="color: #3b5998"></i></span>
+						<div class="mini-stat-info">
+							<span class="block" id="posts">122</span>
+							Posts
+						</div>
+					</div>
+				</div>
+			</a>
+			<a>
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+					<div class="mini-stat clearfix bg-soundcloud rounded">
+						<span class="mini-stat-icon"><i class="fa fa-eye" style="color: #ff7700"></i></span>
+						<div class="mini-stat-info">
+							<span class="block" id="post_reach">1533</span>
+							Reach
+						</div>
+					</div>
+				</div>
+			</a>
+			<a>
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+					<div class="mini-stat clearfix bg-bitbucket rounded">
+						<span class="mini-stat-icon"><i class="fa fa-thumbs-up"
+                                        style="color: #205081"></i></span>
+						<div class="mini-stat-info">
+							<span class="block" id="post_like">120</span>
+							Likes
+						</div>
+					</div>
+				</div>
+			</a>
+		</div>
+		<div class="row">
+
+			<a>
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+					<div class="mini-stat clearfix bg-share rounded">
+						<span class="mini-stat-icon"><i class="fa fa-share-alt"
+                                        style="color: #8e44ad"></i></span>
+						<div class="mini-stat-info">
+							<span class="block" id="post_share">14</span>
+							Shares
+						</div>
+					</div>
+				</div>
+			</a>
+			<a>
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+					<div class="mini-stat clearfix bg-comment rounded">
+						<span class="mini-stat-icon"><i class="fa fa fa-comment"
+                                        style="color: #16a085"></i></span>
+						<div class="mini-stat-info">
+							<span class="block" id="totalComments">44</span>
+							Comments
+						</div>
+					</div>
+				</div>
+			</a>
+
+		</div>
+
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-10">
+				<div class="row">
+					<div class="panel rounded shadow">
+						<form>
+
+							<textarea id="content"
+                                        class="form-control input-lg no-border autosize" rows="4"
+                                        placeholder="What’s for tonight?"
+                                        style="overflow: hidden; overflow-wrap: break-word; resize: horizontal; height: 88px;"></textarea>
+
+							<div class="panel-body" id="image_upload"
+								[ngStyle]="{'display': imageUploadOption ? 'block' : 'none'}">
+								<div id="my-dropzone" class="dropzone mb-20 rounded dz-clickable" method="post"
+									enctype="multipart/form-data">
+
+									<div class="dz-default dz-message">
+									</div>
+								</div>
+							</div>
+
+
+							<div class="panel-body" id="user_tag"
+								[ngStyle]="{'display': taggingOption ? 'block' : 'none'}">
+								<select data-placeholder="Tagged User" id="venues" name="venues"
+                                            class="form-control pac-input chosen-select" multiple="" tabindex="-1"
+                                            style="display: none;">
+                                        </select>
+								<div class="chosen-container chosen-container-multi" title="" id="venues_chosen">
+									<ul class="chosen-choices">
+										<li class="search-field"><input type="text" value="Tagged User"
+                                                        class="default" autocomplete="off" style="width:100%; border:none;"
+                                                        tabindex="4"></li>
+									</ul>
+									<div class="chosen-drop">
+										<ul class="chosen-results"></ul>
+									</div>
+								</div>
+							</div>
+
+
+
+
+
+
+
+							<div class="panel-footer">
+								<button type="submit" class="btn btn-success pull-right mt-5" id="post_create">
+                                            POST
+                                        </button>
+								<ul class="nav nav-pills">
+									<li><a (click)="onImageUploadClick()" id="marker" data-toggle="tooltip"
+											data-placement="top" data-html="true" title=""
+											data-original-title="&lt;i&gt; Photo/Video &lt;/i&gt;"><i
+                                                        class="fa fa-camera fa-lg"></i></a></li>
+									<li><a (click)="onTagClick()" id="tagged_user" data-toggle="tooltip"
+											data-placement="top" data-html="true" title=""
+											data-original-title="&lt;i&gt; Tag Friends &lt;/i&gt;"><i
+                                                        class="fa fa-user fa-lg"></i></a></li>
+								</ul>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-2"></div>
+		</div>
+<div class="row" *ngIf = "pageLoading">
+            <div class="col-lg-3 col-md-3 col-sm-4"></div>
+            <div class="col-lg-9 col-md-9 col-sm-8">
+                <div class="row">                    
+                    <div class="posts">                    
+                    </div>                    
+                </div>
+                <div class="row">                    
+                <div id="postLoader" class="lds-ellipsis"><div></div><div></div><div></div><div></div>Loading</div>
+                </div>
+            </div>
+        </div>
+		<div class="row">
+			<div class="col-lg-3 col-md-3 col-sm-4"></div>
+			<div class="col-lg-9 col-md-9 col-sm-8">
+				<div class="row" *ngFor="let post of postsList">
+					<div class="posts">
+
+
+            		<!-- loading -->
+
+		<!-- loading -->
+						<div class="col-md-8">
+							<div class="panel panel-success rounded shadow">
+								<div class="panel-heading no-border">
+									<div class="col-md-9 pull-left">
+										<div class="media">
+											<div class="media-object pull-left"><img
+                            src="{{post.post_user_pic}}"
+                            class="img-circle" style="width: 35px;height: 35px;"></div>
+												<div class="media-body">
+													<p class="media-heading block mb-0 h4 text-white"
+														style="font-weight:bold;font-size: medium;">
+														{{post.post_user_name}}</p>
+													<span class="text-white h6">95 days ago, on January 27, at 01:03 PM </span>
+												</div>
+											</div>
+										</div>
+										<div class="pull-right">
+											<a class="btn btn-teal btn-sm" (click)="onSharePost(post.post_id)"
+												title="Share"><i class="fa fa-share fa-lg"></i></a><a
+												href="post-edit?id=91553792" class="btn btn-info btn-sm"
+												style="margin-left: 5px" title="Edit"><i
+                        class="fa fa-pencil fa-lg"></i></a><a class="btn btn-danger btn-sm" style="margin-left: 5px"
+												title="Delete"><i class="fa fa-trash fa-lg"></i></a>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+									<div class="panel-body no-padding">
+										<div class="panel-body no-padding">
+											<div><small class="block text-muted" (init)="getPostId(post.post_id)"
+                        style="color: #000;font-size: x-large;margin-bottom: 20px;margin-top: 20px;padding-left: 10px;">{{post.post_content}}</small>
+											</div>
+											<div class="blog-item rounded shadow">
+												<div id="carousel-blog-{{post.post_id}}" class="carousel slide"
+													data-ride="carousel" *ngIf="post.post_media.length > 0">
+													<div class="carousel-inner">
+														<div style="text-align:center!important;"
+															[ngClass]="item == post.post_media[0] ? 'item active': 'item'"
+															*ngFor="let item of post.post_media">
+															<img *ngIf="item.media_type == 'image'" src="{{item.media_url}}"
+                                    class="img-responsive" style="max-height:300px;width:auto;margin:0 auto;">
+															<video *ngIf="item.media_type == 'video'" loop="loop"
+																preload="auto" controls="" allowfullscreen="false"
+																style="max-height:300px;width:auto;margin: 0 auto;">
+																<source src="{{item.media_url}}"></video>
+															<div class="carousel-caption">
+																{{gettingIndexes(item,post.post_media)}} of
+																{{gettingImagesLength(post.post_media)}}</div>
+														</div>
+
+													</div><a class="left carousel-control"
+														href="#carousel-blog-{{post.post_id}}" role="button"
+														data-slide="prev"
+														style="height: 280px;"><span class="fa fa-angle-left"></span></a><a
+														class="right carousel-control"
+														href="#carousel-blog-{{post.post_id}}" role="button"
+														data-slide="next"><span class="fa fa-angle-right"></span></a>
+												</div>
+											</div>
+											<div class="inner-all block">
+												<div class="panel-footer" style="padding-top: 0px;padding-bottom: 0px;">
+													<div class="inner-all block"><a 
+															(click)="onPostLike(post.post_id)"
+															[ngStyle]="{'color': post.is_liked == 0 ? 'color:#000' : 'color: rgb(255, 0, 0)'}"><i class="fa fa-heart-o fa-2x"
+                                     style="font-size: medium;"></i>
+															<span>{{post.like_count}}</span> &nbsp;likes
+														</a><i class="fa fa-comment-o fa-2x" style="font-size: medium;margin-left: 5px;"></i>
+														{{post.comment_count}}
+														comments<i class="fa fa-eye fa-2x" style="font-size: medium;margin-left: 5px;"></i>
+														{{post.view_count}}
+														reaches<i class="fa fa-share-square-o fa-2x"
+                                style="font-size: medium;margin-left: 5px;"></i> {{post.share_count}} shares </div>
+												</div>
+												<div class="panel-footer"></div>
+												<div id="comment_counter_text_1397"></div>
+											</div>
+										</div>
+									</div>
+									<div>
+										<div class="panel-footer no-padding no-border" id="postcomment_1350">
+											<div class="line no-margin"></div>
+											<div class="media inner-all no-margin">
+												<div class="pull-left" style="width: 16%">
+                         
+                          
+													<img src="https://picsum.photos/200/300" class="img-circle" alt="..." style="width: 50px;height: 50px;"></div>
+													<div class="media-body">
+                           <!-- here: {{getComments(post.post_id)}} -->
+														<h5 style="font-weight:bold;">Sandeep Makan</h5>
+														<p class="block text-muted"
+															style="color: #000;font-size: larger;">Test</p>
+														<p class="text-xs text-muted">Posted on <span class="text-danger">112 days ago, on January 10, at 06:35 PM</span></p>
+													</div>
+												</div>
+											<div class="panel-footer"></div>
+											<form class="form-horizontal inner-all">
+												<div class="form-group has-feedback no-margin">
+													<input class="form-control" type="text" #commentInput placeholder="Your comment here..."><button (click)="onCreateComment(post.post_id,commentInput.value)"  class="btn btn-comment fa fa-commenting-o form-control-feedback"></button>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+
+
+						</div>
+					</div>
+					<div class="row">
+						<div id="postLoader" class="lds-ellipsis" style="display: none;">
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>Loading
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+
+		<div class="modal fade" id="modal-venues" tabindex="-1" role="dialog" aria-hidden="true">
+
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="panel panel-tab panel-tab-double">
+
+						<div class="panel widget-todo rounded shadow">
+							<div class="panel-heading">
+								<div class="pull-left">
+									<h3 class="panel-title">Venue List</h3>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="panel-body no-padding form-group">
+
+								<input type="text" value="" name="venue_id" id="venue_id">
+
+								<div class="form-group" id="venue_lists" name="venue_lists">
+								</div>
+
+								<div class="form-footer pull-left">
+									<div class="col-sm-offset-3">
+										<button id="select_venue" class="btn btn-success">SELECT</button>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="comment_model" tabindex="-1" role="dialog" aria-hidden="true">
+
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="panel panel-tab panel-tab-double">
+
+						<div class="panel widget-todo rounded shadow">
+							<div class="panel-heading">
+								<div class="pull-left">
+									<h3 class="panel-title">All Comments</h3>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="panel-body no-padding form-group">
+
+								<div class="form-group" id="comment_data"></div>
+
+								<div class="form-footer pull-left">
+									<div class="col-sm-offset-3">
+										<button id="comment_cancel" class="btn btn-tumblr">Close</button>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="share_link_model" tabindex="-1" role="dialog" aria-hidden="true">
+
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="panel panel-tab panel-tab-double">
+
+						<div class="panel widget-todo rounded shadow">
+							<div class="panel-body no-padding form-group">
+
+								<div class="form-group" id="share_link"></div>
+
+								<div class="form-footer pull-left">
+									<div class="col-sm-offset-3">
+										<button id="share_cancel" class="btn btn-tumblr">Close</button>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Start footer content -->
+
+		<!-- Start footer content -->
+		<footer class="footer-content">
+			LITE - Luminous Ideas for Technological Evolutions LLC |
+			contact@whats42nite.com | <a href="https://www.whats42nite.com/T&amp;C.html" target="_blank">Terms and
+				Conditions</a>
+			<!--    https://www.whats42nite.com/tnc.php-->
+		</footer><!-- /.footer-content -->
+		<!--/ End footer content -->
+		<!--/ End footer content -->
+
+</section><!-- /#page-content -->
+<!--/ END PAGE CONTENT -->

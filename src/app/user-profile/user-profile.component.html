@@ -1,0 +1,374 @@
+<section id="page-content">
+	<app-breadcrumb></app-breadcrumb>
+	<div class="body-content animated fadeIn no-overflow no-margin" style="padding-bottom: 0px;">
+		<!-- *ngIf="userProfile" -->
+		<input type="hidden" id="onLoadNotification" value="">
+		<input type="hidden" id="userRoleInput" value="VenueOwner">
+		<div class="row">
+			<div class="col-lg-3 col-md-3 col-sm-4">
+
+				<div class="panel rounded shadow">
+					<div class="panel-body">
+						<div class="inner-all">
+							<ul class="list-unstyled">
+								<li class="text-center">
+
+									<!--  img-bordered-teals-->
+
+									<img class="img-circle" src="{{getUserImage()}}"
+                                    style="width: 150px;height: 150px;"></li>
+
+								<li class="text-center">
+									<h4 class="text-capitaliz">{{getUserName()}}</h4>
+									<p class="text-muted text-capitalize">
+										Account Manager </p>
+								</li>
+								<li>
+									<!-- PRO Account -->
+									<a routerLink="/edit-user-profile"
+										class="btn btn-bitbucket text-center btn-block">Edit Manager Profile</a></li>
+								<li><br></li>
+							</ul>
+						</div>
+					</div>
+				</div><!-- /.panel -->
+			</div>
+
+
+
+			<div class="col-lg-3 col-md-3 col-sm-4">
+				<div class="panel panel-theme rounded shadow" style="height: 325px;">
+					<div class="panel-heading">
+						<div class="pull-left">
+							<h3 class="panel-title">
+								{{getUserName()}} Detail</h3>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="panel-body no-padding rounded">
+						<ul class="list-group no-margin">
+							<li class="list-group-item"><i class="fa fa-user mr-5"></i>{{getUserName()}}</li>
+							<li class="list-group-item"><i class="fa fa-envelope mr-5"></i>
+								{{getUserEmail()}}
+							</li>
+							<li class="list-group-item"><i class="fa fa-phone mr-5"></i> {{getUserMobileNumber()}} </li>
+							<li class="list-group-item" style="margin-top:30px;">
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="divider"></div>
+			</div>
+
+			<!--  Request for W-9 form  -->
+			<div class="col-lg-6 col-md-6 col-sm-6">
+
+				<div class="col-sm-12 col-xs-12" align="center">
+					<div class="panel panel-bg-primary rounded shadow text-center">
+						<div class="panel-body text-center" style="height: 325px;">
+							<ul class="inner-all list-unstyled" style="margin-top: 25px;">
+								<li class="text-center">
+									<h4 class="text-capitalize">Start selling tickets for your events!</h4>
+								</li>
+								<li class="text-center">
+									<p>
+										Complete form to enable ticket sales.
+									</p>
+								</li>
+								<li class="text-center">
+									<p>
+										Promote an easier and more efficient admittance process by selling event tickets
+										through 42nite. Generate analytics of financial results.
+									</p>
+								</li>
+								<li class="text-center">
+									<p>
+										Funds will be transferred to your bank account in 2 business days and a 1%
+										transaction fee will be charged.
+									</p>
+								</li>
+								<li class="text-center" *ngIf="userRole == 'Promoter'">
+									<a type="button"value=""
+										class="btn btn-warning"><b>Setup</b></a> <br><br>
+									<sup class="mt-4">Powered by <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Stripe_Logo%2C_revised_2016.svg/1280px-Stripe_Logo%2C_revised_2016.svg.png" height="8%" width="8%"> </sup>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div class="body-content animated fadeIn no-margin" style="padding-top: 0px;">
+		<div class="row">
+			<div class="panel rounded shadow no-overflow no-padding no-margin">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="panel-heading">
+							<div class="col-md-6 pull-left">
+								<h3 class="panel-title" style="font-weight:bold;">My Venues: ({{venueCount}})</h3>
+							</div>
+							<div class="col-md-6" style="padding-top: 2px">
+
+								<div class="pull-right">
+									<button class="btn btn-sm" routerLink="/add-venue" data-action="" data-container="body" data-toggle="tooltip"
+                                    data-placement="top" data-title="Add Venue" data-original-title="" title=""><i
+                                        class="fa fa-plus"></i>
+                                </button>
+								</div>
+
+								<div class="pull-right">
+									<div class="form-group no-margin no-padding has-feedback" style="width: 230px">
+										<input (input)="onSearchChange($event.target.value)" class="form-control" placeholder="Type here to search venue" type="text">
+
+                                </div>
+									</div>
+
+
+									<!-- </form> -->
+								</div>
+								<div class="clearfix"></div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="body-content animated fadeIn no-margin no-padding">
+			<div class="formLoader" *ngIf="pageLoading">
+				<ul class="formLoading">
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+			</div>
+			<div class="row" *ngFor="let venue of venueDetails">
+				<div class="venues">
+					<div id="blog-list">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="body-content">
+									<div class="panel panel-heading col-lg-12 col-md-12 col-sm-12">
+										<div class="panel panel-heading bg-dark">
+											<div class="pull-left">
+												<h3 class="panel-title" style="color: #ffffff">
+													<i [ngClass]="venue.venue_type == 'club' ? 'fa fa-glass': 'fa fa-globe'"></i>
+													{{venue.venue_name}}
+												</h3>
+											</div>
+											<div class="pull-right"><a class="pull-right"
+													(click)="onDeleteVenue(venue.venue_id)" title="Delete"
+													style="margin-right: 3px"><i class="btn btn-danger"> <i
+                                                    class="fa fa-trash"></i></i></a>
+												<a class="pull-right" title="Edit" (click)="onEditVenue(venue.venue_id)"
+													style="margin-right: 5px"><i class="btn btn-info"> <i
+                                                    class="fa fa-pencil-square-o"></i></i></a></div>
+											<div class="clearfix"></div>
+
+
+										</div><a class=""></a>
+
+
+										<div class="col-md-3">
+											<div class="blog-item rounded shadow">
+												<div id="carousel-blog-post-{{venue.venue_id}}" class="carousel slide"
+													data-ride="carousel">
+													<div class="carousel-inner">
+														<div [ngClass]="p_image == venue.profile_images[0] ? 'item active': 'item'"
+															*ngFor="let p_image of venue.profile_images">
+															<img id="{{p_image}}"
+                               src="{{p_image}}"
+                               class="img-responsive"
+                               style="width: 100%; height: 300px; object-fit:contain">
+
+															<div class="carousel-caption">
+																{{gettingIndexes(p_image,venue.profile_images)}} of
+																{{gettingImagesLength(venue.profile_images)}}</div>
+														</div>
+
+
+													</div><a class="left carousel-control"
+														href="#carousel-blog-post-{{venue.venue_id}}" role="button"
+														data-slide="prev"><span class="fa fa-angle-left"></span></a><a
+														class="right carousel-control"
+														href="#carousel-blog-post-{{venue.venue_id}}" role="button"
+														data-slide="next"><span class="fa fa-angle-right"></span></a>
+												</div>
+											</div>
+										</div>
+
+										<div class="col-md-5">
+											<div class="">
+												<div class="panel-heading btn-primary">
+													<div class="pull-left">
+														<h3 class="panel-title">Venue Detail</h3>
+													</div>
+													<div class="clearfix"></div>
+												</div>
+												<div class="panel panel-default shadow">
+													<div class="panel-body no-padding">
+														<div class="table-responsive">
+															<table class="table table-bordered table-striped">
+																<tbody>
+																	<tr>
+																		<td><b>Name:</b></td>
+																		<td>{{venue.venue_name}}
+																		</td>
+																	</tr>
+																	<tr>
+																		<td><b>Type:</b></td>
+																		<td>{{venue.venue_type}}
+																		</td>
+																	</tr>
+																	<tr>
+																		<td><b>Email:</b></td>
+																		<td>{{venue.email}}
+																		</td>
+																	</tr>
+																	<tr>
+																		<td><b>Number:</b></td>
+																		<td>{{venue.phone_no}}
+																		</td>
+																	</tr>
+																	<tr>
+																		<td><b>City:</b></td>
+																		<td>{{venue.city}}</td>
+																	</tr>
+																	<tr>
+																		<td><b>Address:</b></td>
+																		<td>{{venue.address}}
+																		</td>
+																	</tr>
+																	<tr>
+																		<td><b>Description:</b></td>
+																		<td>{{venue.description}}
+																		</td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="" *ngIf="venue.opening_hours">
+												<div class="panel-heading btn-warning">
+													<div class="pull-left">
+														<h3 class="panel-title" style="align-items: center">Opening
+															Schedule</h3>
+													</div>
+													<div class="clearfix"></div>
+												</div>
+												<table class="table table-bordered table-striped">
+													<tbody>
+														<tr></tr>
+														<tr>
+															<th>Monday</th>
+															<td
+																*ngIf="venue.opening_hours.monday.opening; else isClosed">
+																{{venue.opening_hours.monday.opening}}
+																to
+																{{venue.opening_hours.monday.closing}}
+															</td>
+
+															<ng-template #isClosed>
+																<td>Closed</td>
+															</ng-template>
+														</tr>
+														<tr></tr>
+														<tr>
+															<th>Tuesday</th>
+															<td
+																*ngIf="venue.opening_hours.tuesday.opening; else isClosed">
+																{{venue.opening_hours.tuesday.opening}}
+																to
+																{{venue.opening_hours.tuesday.closing}}
+															</td>
+															<ng-template #isClosed>
+																<td>Closed</td>
+															</ng-template>
+														</tr>
+														<tr></tr>
+														<tr>
+															<th>Wednesday</th>
+															<td
+																*ngIf="venue.opening_hours.wednesday.opening; else isClosed">
+																{{venue.opening_hours.wednesday.opening}}
+																to
+																{{venue.opening_hours.wednesday.closing}}
+															</td>
+															<ng-template #isClosed>
+																<td>Closed</td>
+															</ng-template>
+														</tr>
+														<tr></tr>
+														<tr>
+															<th>Thursday</th>
+															<td
+																*ngIf="venue.opening_hours.thursday.opening; else isClosed">
+																{{venue.opening_hours.thursday.opening}}
+																to
+																{{venue.opening_hours.thursday.closing}}
+															</td>
+															<ng-template #isClosed>
+																<td>Closed</td>
+															</ng-template>
+														</tr>
+														<tr></tr>
+														<tr>
+															<th>Friday</th>
+															<td
+																*ngIf="venue.opening_hours.friday.opening; else isClosed">
+																{{venue.opening_hours.friday.opening}}
+																to
+																{{venue.opening_hours.friday.closing}}
+															</td>
+															<ng-template #isClosed>
+																<td>Closed</td>
+															</ng-template>
+														</tr>
+														<tr></tr>
+														<tr>
+															<th>Saturday</th>
+															<td
+																*ngIf="venue.opening_hours.saturday.opening; else isClosed">
+																{{venue.opening_hours.saturday.opening}}
+																to
+																{{venue.opening_hours.saturday.closing}}
+															</td>
+															<ng-template #isClosed>
+																<td>Closed</td>
+															</ng-template>
+														</tr>
+														<tr></tr>
+														<tr>
+															<th>Sunday</th>
+															<td
+																*ngIf="venue.opening_hours.sunday.opening; else isClosed">
+																{{venue.opening_hours.sunday.opening}}
+																to
+																{{venue.opening_hours.sunday.closing}}
+															</td>
+															<ng-template #isClosed>
+																<td>Closed</td>
+															</ng-template>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+</section>

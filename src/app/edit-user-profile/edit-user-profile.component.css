@@ -1,0 +1,15 @@
+.custom-dropzone {
+	height: 250px;
+	     background-repeat: no-repeat;
+    background-image: url(https://www.whats42nite.com/prodev/assets/global/img/plugins/dropzone/uploadfile.png) !important;
+    background-position: center;
+    background-size: 150px !important;
+	color: #fff;
+	border:none;
+	border-radius: 5px;
+	font-size: 20px;
+}
+
+.custom-dropzone.ngx-dz-hovered {
+  border: 5px solid rgb(235, 79, 79);
+}

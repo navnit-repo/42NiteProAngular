@@ -1,0 +1,315 @@
+<section id="page-content">
+	<app-breadcrumb></app-breadcrumb>
+	<div class="body-content animated fadeIn">
+
+
+		<!-- new datatable 1 -->
+		<div class="panel rounded shadow">
+			<div class="panel-heading">
+				<div class="pull-left">
+					<h3 class="panel-title" style="font-weight:bold;">Promoter Requests
+					</h3>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="panel-body">
+
+				<div id="table_wrapper" class="table table-striped table-lilac dataTable no-footer">
+
+
+					<div class="dataTables_scroll">
+						<div class="dataTables_scrollHead"
+							style="overflow: hidden; position: relative; border: 0px; width: 100%;">
+							<div class="dataTables_scrollHeadInner"
+								style="box-sizing: content-box; width: 1371px; padding-right: 0px;">
+
+							</div>
+						</div>
+						<div class="dataTables_scrollBody" style="position: relative; overflow: auto; width: 100%;">
+							<table id="table1" class="table table-striped table-lilac dataTable no-footer" role="grid"
+								aria-describedby="table_info" datatable [dtOptions]="dtOptions"
+								[dtTrigger]="promoterRequestTrigger">
+
+								<thead>
+									<tr role="row">
+										<th data-hide="phone" class="text-center sorting_desc" tabindex="0"
+											aria-controls="table1" rowspan="1" colspan="1" aria-sort="descending"
+											aria-label="Promoter Name: activate to sort column ascending">
+											Promoter Name</th>
+										<th data-hide="phone" class="text-center sorting" tabindex="0"
+											aria-controls="table1" rowspan="1" style="min-width: 110px" colspan="1"
+											aria-label="Email: activate to sort column ascending">Email</th>
+										<th data-hide="phone,tablet" class="text-center sorting_disabled" rowspan="1"
+											colspan="1" aria-label="Mobile No">Mobile No</th>
+										<th data-hide="phone" class="text-center sorting" tabindex="0"
+											aria-controls="table1" rowspan="1" colspan="1"
+											aria-label="Venue Name: activate to sort column ascending">Venue Name</th>
+										<th data-hide="phone,tablet" style="min-width: 150px"
+											class="text-center sorting_disabled" rowspan="1" colspan="1"
+											aria-label="Action">Action</th>
+									</tr>
+								</thead>
+
+								<tbody>
+
+									<tr role="row" class="odd" *ngFor="let requestList of promotersRequestList">
+										<td class="sorting_1">{{requestList.promoter_name}}</td>
+										<td>{{requestList.email}}</td>
+										<td>{{requestList.mobile_number}}</td>
+										<td>{{requestList.venue_name}} </td>
+										<td><a data-toggle="tooltip" data-placement="top" title="Accept Request"
+												style="color: black">
+												<button class="btn btn-primary btn-slideright ">Accept</button>
+											</a><a data-toggle="tooltip" data-placement="top" title="Reject"
+												style="color: black">
+												<button class="btn btn-youtube btn-slideright ">Reject</button>
+											</a></td>
+									</tr>
+
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- new datatable 1 end-->
+
+
+		<!-- new data table 2 -->
+
+		<div class="panel rounded shadow">
+			<div class="panel-heading">
+				<div class="pull-left">
+					<h3 class="panel-title" style="font-weight:bold;">Promoters
+					</h3>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="panel-body">
+
+				<div id="table_wrapper" class="table table-striped table-lilac dataTable no-footer">
+
+
+					<div class="dataTables_scroll">
+						<div class="dataTables_scrollHead"
+							style="overflow: hidden; position: relative; border: 0px; width: 100%;">
+							<div class="dataTables_scrollHeadInner"
+								style="box-sizing: content-box; width: 1371px; padding-right: 0px;">
+
+							</div>
+						</div>
+						<div class="dataTables_scrollBody" style="position: relative; overflow: auto; width: 100%;">
+							<table id="table2" class="table table-striped table-teal dataTable no-footer" role="grid"
+								aria-describedby="table_info" datatable [dtOptions]="dtOptions"
+								[dtTrigger]="promotersTrigger">
+
+								<thead>
+									<tr role="row">
+										<th data-hide="phone" class="text-center sorting_desc" tabindex="0"
+											aria-controls="table2" rowspan="1" colspan="1" aria-sort="descending"
+											aria-label="Promoter Name: activate to sort column ascending">
+											Promoter Name</th>
+										<th data-hide="phone" class="text-center sorting" tabindex="0"
+											aria-controls="table2" rowspan="1" colspan="1"
+											aria-label="Affiliated Venues: activate to sort column ascending">Affiliated
+											Venues</th>
+										<th data-hide="phone" class="text-center sorting" tabindex="0"
+											aria-controls="table2" rowspan="1" colspan="1"
+											aria-label="Email: activate to sort column ascending">Email</th>
+										<th data-hide="phone,tablet" class="text-center sorting_disabled"
+											style="min-width: 90px" rowspan="1" colspan="1" aria-label="Mobile No">
+											Mobile No</th>
+										<th data-hide="phone,tablet" class="text-center sorting_disabled" rowspan="1"
+											colspan="1" aria-label="Action">Action</th>
+									</tr>
+								</thead>
+
+								<tbody>
+
+									<tr role="row" class="odd" *ngFor="let list of promotersList">
+										<td class="sorting_1">{{list.promoter_name}}</td>
+										<td>{{list.affiliated_venues}}</td>
+										<td>{{list.email}}</td>
+										<td>{{list.phone_no}}</td>
+										<td><a data-toggle="tooltip" data-placement="top" title="Affiliate"
+												style="color: black">
+												<button class="btn btn-success btn-slideright" data-toggle="modal" data-target="#myModal">Affiliate</button>
+											</a></td>
+									</tr>
+
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- new data table 2 end-->
+
+
+
+		<!-- new data table 3 -->
+
+		<div class="panel rounded shadow">
+			<div class="panel-heading">
+				<div class="pull-left">
+					<h3 class="panel-title" style="font-weight:bold;">Affiliated Promoters
+					</h3>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="panel-body">
+
+				<div id="table_wrapper" class="table table-striped table-info dataTable no-footer">
+
+
+					<div class="dataTables_scroll">
+						<div class="dataTables_scrollHead"
+							style="overflow: hidden; position: relative; border: 0px; width: 100%;">
+							<div class="dataTables_scrollHeadInner"
+								style="box-sizing: content-box; width: 1371px; padding-right: 0px;">
+
+							</div>
+						</div>
+						<div class="dataTables_scrollBody" style="position: relative; overflow: auto; width: 100%;">
+							<table id="table3" class="table table-striped table-info dataTable no-footer" role="grid"
+								aria-describedby="table_info" datatable [dtOptions]="dtOptions"
+								[dtTrigger]="affiliatedPromotersTrigger">
+
+								<thead>
+									<tr role="row">
+										<th data-hide="phone" class="text-center sorting_desc" tabindex="0"
+											aria-controls="table3" rowspan="1" colspan="1" aria-sort="descending"
+											aria-label="Promoter Name: activate to sort column ascending">
+											Promoter Name</th>
+										<th data-hide="phone" class="text-center sorting" tabindex="0"
+											aria-controls="table3" rowspan="1" colspan="1"
+											aria-label="Email: activate to sort column ascending">Email</th>
+										<th data-hide="phone,tablet" class="text-center sorting_disabled" rowspan="1"
+											colspan="1" aria-label="Mobile No">Mobile No</th>
+										<th data-hide="phone" class="text-center sorting" tabindex="0"
+											aria-controls="table3" rowspan="1" colspan="1"
+											aria-label="Venue Name: activate to sort column ascending">Venue Name</th>
+										<th data-hide="phone,tablet" class="text-center sorting_disabled" rowspan="1"
+											colspan="1" aria-label="Action">Action</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr role="row" class="odd" *ngFor="let affiliatedList of affiliatedPromotersList">
+										<td class="sorting_1">{{affiliatedList.promoter_name}}</td>
+										<td>{{affiliatedList.email}}</td>
+										<td>{{affiliatedList.mobile_number}}</td>
+										<td>{{affiliatedList.venue_name}}</td>
+										<td><a data-toggle="tooltip" data-placement="top" title="Delete"
+												style="color: black">
+												<button class="btn btn-youtube btn-slideright ">Unaffiliate</button>
+											</a></td>
+									</tr>
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- new data table 3 end-->
+
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="panel panel-tab panel-tab-double">
+
+						<div class="panel widget-todo rounded shadow">
+							<div class="panel-heading">
+								<div class="pull-left">
+									<h3 class="panel-title">Venue List</h3>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="panel-body no-padding">
+
+								<input type="hidden" value="960" name="promoter_id" id="promoter_id">
+								<input type="hidden" value="" name="value" id="value">
+
+								<div id="venue_lists" name="venue_lists">
+									<div class="ckbox ckbox-success" id="all" style="margin-left: 20px">
+										<input class="all" type="checkbox" value="undefined" name="chk_all_box" id="undefined"><label for="undefined">All</label>
+									</div>
+									<div class="ckbox ckbox-success" id="chk_box" style="margin-left: 20px">
+										<input class="chk_box" type="checkbox" value="432" name="chk_box" id="432"><label for="432">LITE Club</label>
+									</div>
+									<div class="ckbox ckbox-success" id="chk_box" style="margin-left: 20px">
+										<input class="chk_box" type="checkbox" value="438" name="chk_box" id="438"><label for="438">Venue iOS Camera</label>
+									</div>
+									<div class="ckbox ckbox-success" id="chk_box" style="margin-left: 20px">
+										<input class="chk_box" type="checkbox" value="451" name="chk_box" id="451"><label for="451">Mo Lounge</label>
+									</div>
+									<div class="ckbox ckbox-success" id="chk_box" style="margin-left: 20px">
+										<input class="chk_box" type="checkbox" value="459" name="chk_box" id="459"><label for="459">New Venue Through Backend</label>
+									</div>
+									<div class="ckbox ckbox-success" id="chk_box" style="margin-left: 20px">
+										<input class="chk_box" type="checkbox" value="478" name="chk_box" id="478"><label for="478">5185 Stratemeyer Dr</label>
+									</div>
+									<div class="ckbox ckbox-success" id="chk_box" style="margin-left: 20px">
+										<input class="chk_box" type="checkbox" value="479" name="chk_box" id="479"><label for="479">Gordon's Bay United Church New Venue</label>
+									</div>
+									<div class="ckbox ckbox-success" id="chk_box" style="margin-left: 20px">
+										<input class="chk_box" type="checkbox" value="481" name="chk_box" id="481"><label for="481">124nsljhwu </label>
+									</div>
+									<div class="ckbox ckbox-success" id="chk_box" style="margin-left: 20px">
+										<input class="chk_box" type="checkbox" value="482" name="chk_box" id="482"><label for="482">cafe 2020</label>
+									</div>
+									<div class="ckbox ckbox-success" id="chk_box" style="margin-left: 20px">
+										<input class="chk_box" type="checkbox" value="489" name="chk_box" id="489"><label for="489">Café Tu Tu Tango</label>
+									</div>
+									<div class="ckbox ckbox-success" id="chk_box" style="margin-left: 20px">
+										<input class="chk_box" type="checkbox" value="490" name="chk_box" id="490"><label for="490">Fun Spot America</label>
+									</div>
+									<div class="ckbox ckbox-success" id="chk_box" style="margin-left: 20px">
+										<input class="chk_box" type="checkbox" value="492" name="chk_box" id="492"><label for="492">Lake Eola</label>
+									</div>
+									<div class="ckbox ckbox-success" id="chk_box" style="margin-left: 20px">
+										<input class="chk_box" type="checkbox" value="496" name="chk_box" id="496"><label for="496">test-venue-alex41</label>
+									</div>
+									<div class="ckbox ckbox-success" id="chk_box" style="margin-left: 20px">
+										<input class="chk_box" type="checkbox" value="497" name="chk_box" id="497"><label for="497">Praxiv Lounge Dev</label>
+									</div>
+									<div class="ckbox ckbox-success" id="chk_box" style="margin-left: 20px">
+										<input class="chk_box" type="checkbox" value="498" name="chk_box" id="498"><label for="498">LITE Lounge Praxiv Dev</label>
+									</div>
+									<div class="ckbox ckbox-success" id="chk_box" style="margin-left: 20px">
+										<input class="chk_box" type="checkbox" value="499" name="chk_box" id="499"><label for="499">Lite Lounge</label>
+									</div>
+									<div class="ckbox ckbox-success" id="chk_box" style="margin-left: 20px">
+										<input class="chk_box" type="checkbox" value="554" name="chk_box" id="554"><label for="554">12340 Boggy Creek Rd</label>
+									</div>
+								</div>
+
+								<div class="form-footer pull-left">
+									<div class="col-sm-offset-3">
+										<button type="submit" id="submit" class="btn btn-success">Connect</button>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<footer class="footer-content">
+			LITE - Luminous Ideas for Technological Evolutions LLC | contact@whats42nite.com | <a target="_blank">Terms
+				and Conditions</a>
+		</footer>
+	</div>
+</section>

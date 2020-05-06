@@ -1,0 +1,193 @@
+<section id="page-content">
+	<app-breadcrumb></app-breadcrumb>
+	<div class="body-content animated fadeIn">
+
+		<!--  Detail of event start  -->
+		<div id="blog-list">
+			<div class="row">
+
+
+				<div class="col-md-12">
+					<div class="blog-item rounded shadow">
+						<!-- <a routerLink="#" class="blog-img" >
+							<img src="{{getEventImage()}}" style="margin-right:100px;margin-top: 25px;height: 230px;width: 100%"
+                            class="img-responsive full-width" alt="" ></a> -->
+						<a href="#" class="blog-img"><img
+                                style="margin: 20px;margin-top: 25px;height: 230px;width: 100%"
+                                src="{{getEventImage()}}" class="img-responsive full-width" alt=""></a>
+
+							<div class="blog-details">
+								<div class="body-content animated fadeIn" style="margin-left: 20px;">
+
+									<!-- Start grid option -->
+									<div class="row">
+										<div class=" col-md-12">
+
+											<div class="table-responsive">
+												<table class="table table-bordered table-striped" style="width:400px;">
+													<tbody>
+														<tr>
+															<th>Event Name</th>
+															<td colspan="4">{{getEventName()}}</td>
+														</tr>
+														<tr>
+															<th>Event Description</th>
+															<td colspan="4">{{getEventDescription()}}</td>
+														</tr>
+														<tr>
+															<th>Venue Name</th>
+															<td colspan="4">{{getVenueName()}}</td>
+														</tr>
+														<tr>
+															<th>Event Seats</th>
+															<td colspan="4">{{getEventSeats()}}</td>
+														</tr>
+
+														<tr>
+															<th>Age Group</th>
+															<td colspan="4">{{getAgeGroup()}}</td>
+														</tr>
+														<tr>
+															<th>Event Date</th>
+															<td colspan="4">{{getEventDate()}}</td>
+														</tr>
+														<tr>
+															<th>Event Time</th>
+															<td colspan="4">{{getEventTime()}}</td>
+														</tr>
+
+													</tbody>
+												</table>
+											</div><!-- /.table-responsive -->
+										</div>
+									</div><!-- /.row -->
+									<!--/ End grid option -->
+								</div>
+							</div>
+
+
+					</div>
+				</div>
+			</div>
+
+			<div class="body-content animated fadeIn" *ngIf="showImages">
+
+				<div class="panel rounded shadow no-overflow">
+					<div class="panel-heading">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="pull-left">
+									<h3 class="panel-title" style="font-weight:bold;">Event Pictures</h3>
+								</div>
+								<div class="pull-right">
+									<button class="btn btn-sm" data-action="refresh" id="add_images"
+                                        data-container="body" data-toggle="tooltip" data-placement="top"
+                                        data-title="Add Images" data-original-title="" title=""><i
+                                            class="fa fa-plus"></i></button>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+
+				<!-- <div id="app" data-state="gallery">
+					<div class="gallery">
+						<figure class="gallery-image" *ngFor="let image of pastEventImages">
+							<img src="{{image.image_url}}" width="400" height="400" />
+							<figcaption>Image Caption</figcaption>
+						</figure>
+
+
+					</div>
+					<div class="detail">
+					</div>
+				</div> -->
+
+				<style>
+					img {
+						float: left;
+						width: 150px;
+						height: 150px;
+						background-size: cover;
+						display: block;
+						margin-left: auto;
+						margin-right: auto;
+						width: 50%;
+           
+
+					}
+				</style>
+
+
+				<div class="row" style="width:100%;">
+					<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center" *ngFor="let image of pastEventImages"
+						style="margin: 0px 0px 10px 30px; box-shadow: 5px 5px 5px grey;">
+						<div class="hover ehover12">
+							<img class="img" src="{{image.image_url}}" alt="">
+							<div class="overlay">
+
+								<button class="info nullbutton h3" data-toggle="modal" data-target="#modal12">
+                    <h2>Image Name Not Getting From Server</h2>
+                    </button>
+							</div>
+						</div>
+					</div>
+
+
+
+
+
+				</div>
+
+
+			</div>
+		</div>
+
+
+
+
+
+		<div class="cbp-popup-wrap cbp-popup-lightbox cbp-popup-transitionend cbp-popup-ready" data-action="close"
+			*ngIf="imagePreview">
+			<div class="cbp-popup-content">
+				<div class="cbp-popup-lightbox-figure"><img src="{{currentImage}}" class="cbp-popup-lightbox-img" data-action="next" style="max-height: 464px;">
+					<div class="cbp-popup-lightbox-bottom">
+						<div class="cbp-popup-lightbox-title">Image Name Here</div>
+						<div class="cbp-popup-lightbox-counter"></div>
+					</div>
+				</div>
+			</div>
+			<div class="cbp-popup-loadingBox"></div>
+			<div class="cbp-popup-navigation-wrap">
+				<div class="cbp-popup-navigation">
+					<div class="cbp-popup-close" title="Close (Esc arrow key)" data-action="close"
+						(click)="onCloseImagePreview()"><img src="" width="10%"></div>
+						<div class="cbp-popup-next" title="Next (Right arrow key)" data-action="next"
+							style="display: block;" (click)="onNextImage()"></div>
+						<div class="cbp-popup-prev" title="Previous (Left arrow key)" data-action="prev"
+							style="display: block;" (click)="onPrevImage()"></div>
+					</div>
+				</div>
+			</div>
+
+			<!-- <h1>new</h1>
+		<div class="gallerize-example">
+			<p class="container-gallery" gallerize>
+				<img *ngFor="let image of pastEventImages" [src]="image.image_url">
+            </p>
+		</div> -->
+
+
+
+
+
+			<footer class="footer-content">
+				LITE - Luminous Ideas for Technological Evolutions LLC | contact@whats42nite.com | <a
+					target="_blank">Terms
+					and Conditions</a>
+			</footer>
+		</div>
+</section>

@@ -1,0 +1,139 @@
+<div id="sign-wrapper">
+	<!-- Register form -->
+	<form class="form-horizontal rounded shadow no-overflow" autocomplete="off" [formGroup]="registerForm"
+		(ngSubmit)="onSubmit()">
+
+		<div class="sign-body" style="box-shadow: 10px 10px 5px #888888;">
+
+			<!-- Brand  42nite_logo.png -->
+			<div class="brand">
+				<img src="https://www.whats42nite.com/prodev/images/f42nite_pro_logo.png"  style="width: 300px; height: 130px" alt="brand logo"/>
+                </div>
+				<!--/ Brand -->
+				<div style="display: block; background-color: #6C6D6B">
+
+
+					<div class="form-group">
+						<div class="input-group input-group-lg rounded no-overflow">
+							<span class="input-group-addon" style="padding-left: 10px; padding-right: 0px"><i class="fa fa-user"></i></span>
+							<input type="text" formControlName="username"  class="form-control signup-input" placeholder="Name of Account Manager"
+                               value="" required>
+
+
+						</div>
+							<div class="style= margin-left: 30px;">
+								<div class="help-block text-danger"
+									*ngIf="registerForm.controls.username.invalid && registerForm.controls.username.touched && registerForm.controls.username.errors.required">
+									Name is required.</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="input-group input-group-lg rounded no-overflow">
+								<span class="input-group-addon" style="padding-left: 10px; padding-right: 0px"><i class="fa fa-envelope"></i></span>
+								<input type="email" formControlName="email"  class="form-control signup-input" placeholder="Your Email"
+                                value="" required>
+
+							</div>
+								<div class="style= margin-left: 30px;">
+									<div class="help-block text-danger"
+										*ngIf="registerForm.controls.email.invalid && registerForm.controls.email.touched && registerForm.controls.email.errors.required">
+										Email is required.</div>
+
+									<div class="help-block text-danger"
+										*ngIf="registerForm.controls.email.invalid && registerForm.controls.email.touched && registerForm.controls.email.errors.pattern">
+										Invalid Email.</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="input-group input-group-lg rounded no-overflow">
+									<span class="input-group-addon" style="padding-left: 10px; padding-right: 0px"><i class="fa fa-lock"></i></span>
+									<input type="password" formControlName="password" class="form-control"
+                               value=""
+                               placeholder="Password" required>
+
+								</div>
+									<div class="help-block text-danger"
+										*ngIf="registerForm.controls.password.invalid && registerForm.controls.password.touched && registerForm.controls.password.errors.required">
+										Password is required.</div>
+								</div>
+
+
+								<div class="form-group">
+									<div class="input-group input-group-lg rounded no-overflow">
+										<span class="input-group-addon" style="padding-left: 10px; padding-right: 0px"><i class="fa fa-lock"></i></span>
+										<input type="password"  class="form-control" formControlName="confirmPassword"
+                               value=""
+                               placeholder="Confirm Password" required>
+                        </div>
+										<div *ngIf="registerForm.errors?.unmatchPassword && (registerForm.touched || registerForm.dirty)"
+											class="help-block text-danger">
+											Password not matched
+										</div>
+									</div>
+
+
+									<div class="form-group">
+										<div class="input-group input-group-lg rounded no-overflow">
+											<span class="input-group-addon" style="padding-left: 10px; padding-right: 0px"><i class="fa fa-phone"></i></span>
+											<input
+                               value="" class="form-control signup-input"
+                               placeholder="Phone Number"
+                               type="tel" formControlName="phoneNumber"  required
+                               >
+
+										</div>
+											<div class="help-block text-danger"
+												*ngIf="registerForm.controls.phoneNumber.invalid && registerForm.controls.phoneNumber.touched && registerForm.controls.phoneNumber.errors.required">
+												Phone Number is required.</div>
+										</div>
+										<div class="form-group">
+											<!-- 
+						<ng-select [items]="userRole"  class="form-control mb-15 custom" bindLabel="role">
+						</ng-select> -->
+											<!-- <p>Selected role: {{userRole | json}}</p> -->
+											<select  class="form-control mb-15" formControlName="userRole">
+                        <option value="VenueOwner" [selected]="isSelected">Venue Owner</option>
+                        <option value="Promoter" >Promoter</option>
+                    </select>
+
+										</div>
+
+
+
+
+										<div class="sign-footer">
+											<div class="form-group">
+												<div class="ckbox ckbox-theme">
+													<input id="term-of-service" formControlName="termsAndCondition" value="1" type="checkbox" required>
+													<label for="term-of-service" class="rounded">I agree with <a
+                                        href="../../T&C.html" target="_blank">Term Of
+                                    Service</a></label>
+
+
+												</div>
+												<div class="help-block text-danger"
+													*ngIf="registerForm.controls.termsAndCondition.invalid && registerForm.controls.termsAndCondition.touched && registerForm.controls.termsAndCondition.errors.required">
+													You have to agree with our Term Of Condition to Register your
+													account.
+												</div>
+											</div>
+											<div class="form-group">
+												<button type="submit"
+                                class="btn main-button btn-lg btn-block no-margin rounded">
+                            Sign Up
+                        </button>
+											</div>
+										</div>
+
+										<!-- Content text -->
+										<p class="text-muted text-center sign-link">
+											<a routerLink="/signin"> Have an account ?</a></p>
+										<!--/ Content text -->
+									</div>
+								</div>
+	</form>
+	<!--/ Register form -->
+</div>
+
+

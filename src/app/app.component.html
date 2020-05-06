@@ -1,0 +1,4 @@
+<app-marquee-header *ngIf="_router.url != '/signin' && _router.url != '/register' && _router.url != '/forgot-password'"> </app-marquee-header>
+<app-side-bar-menu *ngIf="_router.url != '/signin' && _router.url != '/register' && _router.url != '/forgot-password'"></app-side-bar-menu>
+
+<router-outlet></router-outlet>
